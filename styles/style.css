@@ -8,48 +8,31 @@
 
 /* Layout */
 
-#label footer {
-  border-top: 1px solid black;
-  font: 7pt/1.15 sans-serif;
+.label footer {
   margin: .05in .125in 0 .125in;
 }
-#label header {
+
+.label footer section {
+  margin: .02in 0;
+}
+
+.label header {
   border-bottom: 1px solid black;
   font: 7pt/1.15 sans-serif;
   margin: 0 .125in .05in .125in;
 }
 
-#label section {
+.label section {
   margin: .02in .125in;
 }
 
-#label-dispenser,
-#label-receiver {
-  margin: .05in 0;
-  width: 50%;
-}
-
-#label.standard {
-  display: flex;
-  height: 2in;
-  width: 3.625in;
-}
-
-#label.standard>.label-body {
-  height: 1.9375in;
-  margin: auto;
-  overflow: hidden;
-  padding: .0625in 0;
-  width: 3.5in;
-}
-
-#label.infusion {
+.label {
   display: flex;
   height: 5.125in;
   width: 3.125in;
 }
 
-#label.infusion>.label-body {
+.label>.label-body {
   height: 5in;
   margin: auto;
   overflow: hidden;
@@ -57,12 +40,12 @@
   width: 3in;
 }
 
-#label.infusion .lower-half {
+.label .lower-half {
   height: 1.9375in;
   margin-top: .0625in;
 }
 
-#label.infusion .upper-half {
+.label .upper-half {
   height: 3in;
   margin-bottom: .0625in;
 }
@@ -74,35 +57,43 @@
   justify-content: space-between;
 }
 
-#label {
+.label {
   color: black;
   font: 8pt/1.125 sans-serif;
   margin: 0 auto;
 }
 
-#label-drug,
-#label-drug-diluent,
-#label-drug-rate,
-#label-expiration-datetime,
-#label-hospital-name,
-#label-sig,
-#label-patient-name {
-  font-weight: bold;
+.label-checker,
+.label-filler,
+.label-verifier {
+  margin-top: .1in;
 }
 
-#label-hospital-name {
+.label-compounding-notice {
+  border: 1px solid black;
+  font: bold 10pt/1.25 sans-serif;
   text-align: center;
 }
 
-#label-patient-name,
-#label-patient-address-1,
-#label-patient-address-2 {
+.label-drug,
+.label-drug-diluent,
+.label-drug-rate,
+.label-expiration-datetime,
+.label-hospital-name,
+.label-patient-name {
+  font-weight: bold;
+}
+
+.label-hospital-name {
+  text-align: center;
+}
+
+.label-patient-name {
   text-transform: capitalize;
 }
 
-#label-patient-address-1,
-#label-patient-address-2 {
-  font: 7pt/1.15 sans-serif;
+.label-total-volume {
+  text-align: right;
 }
 
 /* State */
@@ -184,6 +175,15 @@
   h3 {
     color: var(--northwell-gray);
     font: 1.618rem/1.75 'Montserrat', sans-serif;
+  }
+
+  h4 {
+    color: var(--northwell-light-blue);
+    font: 1.435rem/1.75 'Montserrat', sans-serif;
+  }
+
+  .strength-units {
+    font-family: 'Montserrat', sans-serif;
   }
 
   input,
@@ -294,13 +294,16 @@
     height: auto;
     position: sticky;
     top: 0;
-    z-index: -1;
   }
 
   /* Module */
 
+  #label-preview-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .form-control {
-    display: inline-block;
     margin: 0 calc( .5 * var(--vertical-rhythm) );
   }
 
@@ -313,20 +316,13 @@
     justify-content: start;
   }
 
-  .clickable-form-control {
-    display: inline-block;
-    margin: 0 calc( .5 * var(--vertical-rhythm) );
+  .stength-units {
+
   }
 
-  #drug-diluent-volume,
-  #drug-form,
-  #drug-strength {
-    width: 7em;
-  }
-
-  #drug-no-strength,
-  #rx-number-override {
-    margin-left: 14em;
+  .drug-strength {
+    text-align: right;
+    width: 5em;
   }
 
   #help {
@@ -348,33 +344,24 @@
     background: linear-gradient(var(--northwell-dark-blue), var(--northwell-light-blue));
     border: 1px inset var(--northwell-light-blue);
   }
-  #label.standard {
+
+  .label {
     background: gray;
     border: 1px solid black;
+    margin: 0 calc(.25 * var(--vertical-rhythm));
   }
 
-  #label.standard>.label-body {
-    background: white;
+  .label>.label-body {
+    background: pink;
     border: 1px solid black;
     border-radius: .125in;
   }
 
-  #label.infusion {
-    background: gray;
-    border: 1px solid black;
-  }
-
-  #label.infusion>.label-body {
-    background: yellow;
-    border: 1px solid black;
-    border-radius: .125in;
-  }
-
-  #label.infusion .upper-half {
+  .label .upper-half {
     border-bottom: 1px dashed gray;
   }
 
-  #label.infusion .lower-half {
+  .label .lower-half {
     border-top: 1px dotted gray;
   }
 
@@ -384,25 +371,8 @@
     margin-left: var(--vertical-rhythm);
   }
 
-  label[for="patient-dob"] {
-    margin-top: calc(1.5 * var(--vertical-rhythm));
-  }
-
   #patient-middle-initial {
     width: 2em;
-  }
-
-  #patient-state {
-    width: 4em;
-  }
-
-  #patient-zip-code {
-    width: 7em;
-  }
-
-  #sig {
-    height: calc( 2 * var(--vertical-rhythm) );
-    width: 16em;
   }
 
   /* State */
