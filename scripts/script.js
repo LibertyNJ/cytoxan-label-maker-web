@@ -5,22 +5,24 @@ const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
 const formElement = document.getElementsByTagName('form')[0];
-const formControlElements = document.querySelectorAll('.form-control');
-
-const labelElement = document.getElementById('label');
-const labelFieldElements = document.querySelectorAll('.label-field');
-
-let completedPrinting = true;
 
 formElement.addEventListener('input', (event) => formInputHandler(event));
 formElement.addEventListener('submit', (event) => formSubmitHandler(event));
 
-window.onbeforeprint = preFlight;
-window.onafterprint = postFlight;
+window.addEventListener('beforeprint', (event) => preFlight(event));
+window.addEventListener('afterprint', (event) => postFlight(event));
 
-function formInputHandler(event) {
-  const eventTarget = event.target;
+function getElementValueById(id) {
+  return document.getElementById(id).value;
+}
+
+function formInputHandler() {
   updateLabel();
+}
+
+function formSubmitHandler(event) {
+  event.preventDefault();
+  window.print();
 }
 
 function updateLabel() {
@@ -36,152 +38,41 @@ function updateLabel() {
       get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
       get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
       get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' }
-    },
-
-    mrn: getElementValueById('patient-mrn'),
-    visitId: getElementValueById('patient-visit-id')
+    }
   };
 
   const cyclophosphamide = {
-    name: 'Cyclophosphamide',
-
-    strength: {
-      number: +getElementValueById('cyclophosphamide-strength'),
-      units: 'mG'
-    },
-
-    concentration: {
-      strength: {
-        number: 20,
-        units: 'mG'
-      },
-
-      volume: {
-        number: 1,
-        units: 'mL'
-      }
-    },
-
-    volume: {
-      get number() { return getDrugVolume(cyclophosphamide) },
-      units: 'mL'
-    },
-
-    diluent: {
-      name: '0.9% Sodium Chloride',
-
-      volume: {
-        get number() { return (cyclophosphamide.strength.number >= 1000) ? 250 : 100 },
-        units: 'mL'
-      }
-    },
-
-    totalVolume: {
-      get number() { return getTotalVolume(cyclophosphamide) },
-      units: 'mL'
-    },
-
-    infusionTime: {
-      number: 1,
-      units: 'hr'
-    },
-
-    rate: {
-      get number() { return getDrugRate(cyclophosphamide) },
-      units: 'mL/hr'
-    }
+    name: 'cyclophosphamide',
+    strength: +getElementValueById('cyclophosphamide-strength'),
+    concentration: 20,
+    get volume() { return getDrugVolume(this) },
+    get diluentVolume() { return (this.strength >= 1000) ? 250 : 100 },
+    get totalVolume() { return getTotalVolume(this) },
+    infusionTime: 1,
+    get rate() { return getDrugRate(this) },
   };
 
   const mesna = {
-    name: 'Mesna',
-
-    strength: {
-      number: +getElementValueById('mesna-strength'),
-      units: 'mG'
-    },
-
-    concentration: {
-      strength: {
-        number: 100,
-        units: 'mG'
-      },
-
-      volume: {
-        number: 1,
-        units: 'mL'
-      }
-    },
-
-    diluent: {
-      name: '0.9% Sodium Chloride',
-
-      volume: {
-        number: 50,
-        units: 'mL'
-      }
-    },
-
-    totalVolume: {
-      get number() { return getTotalVolume(mesna) },
-      units: 'mL'
-    },
-
-    infusionTime: {
-      number: .25,
-      units: 'hr'
-    },
-
-    rate: {
-      get number() { return getDrugRate(mesna) },
-      units: 'mL/hr'
-    }
+    name: 'mesna',
+    strength: +getElementValueById('mesna-strength'),
+    concentration: 100,
+    get volume() { return getDrugVolume(this) },
+    diluentVolume: 50,
+    get totalVolume() { return getTotalVolume(this) },
+    infusionTime: .25,
+    get rate() { return getDrugRate(this) },
   };
 
   const granisetron = {
-    name: 'Granisetron',
-
-    strength: {
-      number: +getElementValueById('granisetron-strength'),
-      units: 'mG'
-    },
-
-    concentration: {
-      strength: {
-        number: 1,
-        units: 'mG'
-      },
-
-      volume: {
-        number: 1,
-        units: 'mL'
-      }
-    },
-
-    diluent: {
-      name: '0.9% Sodium Chloride',
-
-      volume: {
-        number: 50,
-        units: 'mL'
-      }
-    },
-
-    totalVolume: {
-      get number() { return getTotalVolume(granisetron) },
-      units: 'mL'
-    },
-
-    infusionTime: {
-      number: .5,
-      units: 'hr'
-    },
-
-    rate: {
-      get number() { return getDrugRate(granisetron) },
-      units: 'mL/hr'
-    }
+    name: 'granisetron',
+    strength: +getElementValueById('granisetron-strength'),
+    concentration: 1,
+    get volume() { return getDrugVolume(this) },
+    diluentVolume: 50,
+    get totalVolume() { return getTotalVolume(this) },
+    infusionTime: .5,
+    get rate() { return getDrugRate(this) },
   };
-
 
   const preparationDate = {
     full: new Date(getElementValueById('preparation-datetime')),
@@ -190,7 +81,7 @@ function updateLabel() {
     get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
     get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
     get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
-  }
+  };
 
   const expirationDate = {
     get full() { return new Date(new Date(preparationDate.full).setDate(preparationDate.full.getDate() + 1)); },
@@ -199,62 +90,115 @@ function updateLabel() {
     get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
     get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
     get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
-  }
+  };
 
   const verifier = getElementValueById('verifier');
 
   const cyclophosphamideLabel = {
-    parentElement: document.getElementById('cyclophosphamide-label'),
+    element: document.getElementById('cyclophosphamide-label'),
 
-    get drug() { return this.parentElement.querySelector('.label-drug') },
-    get drugVolume() { return this.parentElement.querySelector('.label-drug-volume') },
-    get drugDiluentVolume() { return this.parentElement.querySelector('.label-drug-diluent-volume') },
-    get totalVolume() { return this.parentElement.querySelector('.label-total-volume') },
-    get rate() { return this.parentElement.querySelector('.label-drug-rate') }
+    get drug() { return this.element.querySelector('.label-drug') },
+    get drugVolume() { return this.element.querySelectorAll('.label-drug-volume') },
+    get drugDiluentVolume() { return this.element.querySelectorAll('.label-drug-diluent-volume') },
+    get totalVolume() { return this.element.querySelectorAll('.label-total-volume') },
+    get rate() { return this.element.querySelector('.label-drug-rate') },
+    get compoundingDiluent() { return this.element.querySelector('.label-drug-diluent.compounding') }
   };
 
   const mesnaLabel = {
-    parentElement: document.getElementById('mesna-label'),
+    element: document.getElementById('mesna-label'),
 
-    get drug() { return this.parentElement.querySelector('.label-drug') },
-    get drugVolume() { return this.parentElement.querySelector('.label-drug-volume') },
-    get totalVolume() { return this.parentElement.querySelector('.label-total-volume') },
-    get rate() { return this.parentElement.querySelector('.label-drug-rate') }
+    get drug() { return this.element.querySelector('.label-drug') },
+    get drugVolume() { return this.element.querySelectorAll('.label-drug-volume') },
+    get totalVolume() { return this.element.querySelectorAll('.label-total-volume') },
+    get rate() { return this.element.querySelector('.label-drug-rate') }
   };
 
   const granisetronLabel = {
-    parentElement: document.getElementById('granisetron-label'),
+    element: document.getElementById('granisetron-label'),
 
-    get drug() { return this.parentElement.querySelector('.label-drug') },
-    get drugVolume() { return this.parentElement.querySelector('.label-drug-volume') },
-    get totalVolume() { return this.parentElement.querySelector('.label-total-volume') },
-    get rate() { return this.parentElement.querySelector('.label-drug-rate') }
+    get drug() { return this.element.querySelector('.label-drug') },
+    get drugVolume() { return this.element.querySelectorAll('.label-drug-volume') },
+    get totalVolume() { return this.element.querySelectorAll('.label-total-volume') },
+    get rate() { return this.element.querySelector('.label-drug-rate') }
   };
 
   const patientNameLabelElements = document.querySelectorAll('.label-patient-name');
   const patientDobLabelElements = document.querySelectorAll('.label-patient-dob');
-  const patientMrnLabelElements = document.querySelectorAll('.label-patient-mrn');
-  const patientVisitIdLabelElements = document.querySelectorAll('.label-patient-visit-id');
 
   const expirationDateLabelElements = document.querySelectorAll('.label-expiration-datetime');
   const preparationDateLabelElements = document.querySelectorAll('.label-preparation-datetime');
   const verifierLabelElements = document.querySelectorAll('.label-verifier');
 
-  cyclophosphamideLabel.drug.textContent = `Cyclophosphamide ${(cyclophosphamide.strength.number) ?
-    `${formatNumberForMedicationSafety(cyclophosphamide.strength.number)} ${cyclophosphamide.strength.units}` :
+  cyclophosphamideLabel.drug.textContent = `Cyclophosphamide ${(cyclophosphamide.strength) ?
+    `${formatNumberForMedicationSafety(cyclophosphamide.strength)} mG` :
     ''}`;
 
-  cyclophosphamideLabel.drugVolume.textContent = (cyclophosphamide.strength.number) ?
-    `${cyclophosphamide.volume.number} ${cyclophosphamide.volume.units}` :
-    'Volume';
+  for (let labelField of cyclophosphamideLabel.drugVolume) {
+    labelField.textContent = (cyclophosphamide.strength) ?
+      `${formatNumberForMedicationSafety(cyclophosphamide.volume)} mL` :
+      'Volume';
+  }
 
-  cyclophosphamideLabel.drugDiluentVolume.textContent = (cyclophosphamide.strength.number) ?
-    `${cyclophosphamide.diluent.volume.number} ${cyclophosphamide.diluent.volume.units}` :
-    'Volume';
+  for (let labelField of cyclophosphamideLabel.drugDiluentVolume) {
+    labelField.textContent = (cyclophosphamide.strength) ?
+      `${formatNumberForMedicationSafety(cyclophosphamide.diluentVolume)} mL` :
+      'Volume';
+  }
 
-  cyclophosphamideLabel.totalVolume.textContent = (cyclophosphamide.strength.number) ?
-    `${cyclophosphamide.totalVolume.number} ${cyclophosphamide.totalVolume.units}` :
-    'Total volume';
+  for (let labelField of cyclophosphamideLabel.totalVolume) {
+    labelField.textContent = (cyclophosphamide.strength) ?
+      `Total volume: ${formatNumberForMedicationSafety(cyclophosphamide.totalVolume)} mL` :
+      'Total volume';
+  }
+
+  cyclophosphamideLabel.rate.textContent = `Rate: ${(cyclophosphamide.strength) ?
+    `${formatNumberForMedicationSafety(cyclophosphamide.rate)} mL/hr` :
+    ''}`;
+
+  cyclophosphamideLabel.compoundingDiluent.textContent = `0.9% Sodium Chloride${(cyclophosphamide.strength) ?
+    ` ${cyclophosphamide.diluentVolume} mL` :
+    ''} bag`;
+
+  mesnaLabel.drug.textContent = `Mesna ${(mesna.strength) ?
+    `${formatNumberForMedicationSafety(mesna.strength)} mG` :
+    ''}`;
+
+  for (let labelField of mesnaLabel.drugVolume) {
+    labelField.textContent = (mesna.strength) ?
+      `${formatNumberForMedicationSafety(mesna.volume)} mL` :
+      'Volume';
+  }
+
+  for (let labelField of mesnaLabel.totalVolume) {
+    labelField.textContent = (mesna.strength) ?
+      `Total volume: ${formatNumberForMedicationSafety(mesna.totalVolume)} mL` :
+      'Total volume';
+  }
+
+  mesnaLabel.rate.textContent = `Rate: ${(mesna.strength) ?
+    `${formatNumberForMedicationSafety(mesna.rate)} mL/hr` :
+    ''}`;
+
+  granisetronLabel.drug.textContent = `Granisetron ${(granisetron.strength) ?
+    `${formatNumberForMedicationSafety(granisetron.strength)} mG` :
+    ''}`;
+
+  for (let labelField of granisetronLabel.drugVolume) {
+    labelField.textContent = (granisetron.strength) ?
+      `${formatNumberForMedicationSafety(granisetron.volume)} mL` :
+      'Volume';
+  }
+
+  for (let labelField of granisetronLabel.totalVolume) {
+    labelField.textContent = (granisetron.strength) ?
+      `Total volume: ${formatNumberForMedicationSafety(granisetron.totalVolume)} mL` :
+      'Total volume';
+  }
+
+  granisetronLabel.rate.textContent = `Rate: ${(granisetron.strength) ?
+    `${formatNumberForMedicationSafety(granisetron.rate)} mL/hr` :
+    ''}`;
 
   for (let element of patientNameLabelElements) {
     element.textContent = (!patient.name.last && !patient.name.first && !patient.name.middleInitial) ? 'Patient name' : `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
@@ -262,14 +206,6 @@ function updateLabel() {
 
   for (let element of patientDobLabelElements) {
     element.textContent = `DoB: ${patient.dob.month}${(patient.dob.month && patient.dob.date) ? '/' : ''}${patient.dob.date}${(patient.dob.date && patient.dob.year) ? '/' : ''}${patient.dob.year}`;
-  }
-
-  for (let element of patientMrnLabelElements) {
-    element.textContent = `MRN: ${patient.mrn}`;
-  }
-
-  for (let element of patientVisitIdLabelElements) {
-    element.textContent = `Visit: ${patient.visitId}`;
   }
 
   for (let element of expirationDateLabelElements) {
@@ -283,33 +219,45 @@ function updateLabel() {
   for (let element of verifierLabelElements) {
     element.textContent = `Verify: ${verifier}`;
   }
+
+  function getDrugVolume(drug) {
+    return drug.strength / drug.concentration;
+  }
+
+  function getDrugRate(drug) {
+    return drug.totalVolume / drug.infusionTime;
+  }
+
+  function getTotalVolume(drug) {
+    return drug.volume + drug.diluentVolume;
+  }
+
+  function formatNumberForMedicationSafety(number) {
+    return (number.toLocaleString()[0] === '0') ? number.toLocaleString().replace('0.', '.') : number.toLocaleString();
+  }
+
+  function padLeadingZeros(number, zeros) {
+    return number.toString().padStart(zeros, '0');
+  }
 }
 
-function formSubmitHandler(event) {
-  event.preventDefault();
-  window.print();
+function postFlight() {
+  const printCopies = document.querySelectorAll('.print-copy');
+  for (let printCopy of printCopies) {
+    printCopy.remove();
+  }
 }
 
-function getElementValueById(id) {
-  return document.getElementById(id).value;
-}
+function preFlight() {
+  const labelPreviewElement = document.getElementById('label-preview');
+  const labelRowElement = document.getElementById('label-row');
+  let copiesToPrint = +getElementValueById('copies');
 
-function padLeadingZeros(number, zeros) {
-  return number.toString().padStart(zeros, '0');
-}
-
-function formatNumberForMedicationSafety(number) {
-  return (number.toLocaleString()[0] === '0') ? number.toLocaleString().replace('0.', '.') : number.toLocaleString();
-}
-
-function getDrugVolume(drug) {
-  return drug.strength.number / drug.concentration.strength.number;
-}
-
-function getTotalVolume(drug) {
-  return drug.volume + drug.diluent.volume.number
-}
-
-function getDrugRate(drug) {
-  return drug.totalVolume.number / drug.infusionTime.number;
+  while (copiesToPrint > 1) {
+    let newPrintCopy = document.createElement('div');
+    newPrintCopy.classList.add('print-copy');
+    newPrintCopy.innerHTML = labelRowElement.innerHTML;
+    labelPreviewElement.append(newPrintCopy);
+    copiesToPrint--;
+  }
 }

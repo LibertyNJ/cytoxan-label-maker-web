@@ -28,8 +28,6 @@
           <div class="form-control"><label for="patient-first-name">First</label><input type="text" id="patient-first-name" name="patient-first-name" placeholder="John…" required></div>
           <div class="form-control"><label for="patient-middle-initial">M.I.</label><input type="text" id="patient-middle-initial" class=" optional" name="patient-middle-initial" maxlength="1" placeholder="G…"></div>
         </fieldset>
-        <div class="form-control"><label for="patient-mrn">MRN</label><input type="text" id="patient-mrn" class="optional" name="patient-mrn" maxlength="8" placeholder="12345678…"></div>
-        <div class="form-control"><label for="patient-visit-id">Visit ID</label><input type="text" id="patient-visit-id" class="optional" name="patient-visit-id" minlength="12" maxlength="12" placeholder="500012345678…"></div>
         <div class="form-control"><label for="patient-dob">Date of birth</label><input type="date" id="patient-dob" name="patient-dob" max="9999-12-31" required></div>
       </section>
       <section id="medications">
@@ -48,16 +46,20 @@
         </section>
       </section>
       <section id="verifier-and-preparation">
-        <h3>Verifier and Preparation</h3>
+        <h3>Verifier and preparation</h3>
         <div class="form-control"><label for="verifier">Verifier</label><input type="text" id="verifier" name="verifier" min="1" placeholder="Soandso, RPh…" required></div>
         <div class="form-control"><label for="preparation-datetime">Preparation date & time</label><input type="datetime-local" id="preparation-datetime" name="preparation-datetime" max="9999-12-31T23:59" required></div>
       </section>
-      <button class="print-button" type="submit">Print labels</button>
+      <section id="options-and-print">
+        <h3>Options and print</h3>
+        <div class="form-control"><label for="copies">Copies</label><input type="number" id="copies" name="copies" min="1" placeholder="1…" required></div>
+        <button class="print-button" type="submit">Print labels</button>
+      </section>
     </form>
   </section>
   <section id="label-preview">
     <h2>Label preview</h2>
-    <div id="label-preview-row">
+    <div id="label-row">
       <article id="cyclophosphamide-label" class="label">
         <div class="label-body">
           <div class="upper-half">
@@ -72,76 +74,68 @@
             </header>
             <section>
               <div class="flex-row">
-                <p class="label-patient-name" class="label-field">Patient name</p>
-                <p class="label-patient-dob" class="label-field">DoB: </p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn" class="label-field">MRN: </p>
-                <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                <p class="label-patient-name label-field">Patient name</p>
+                <p class="label-patient-dob label-field">DoB: </p>
               </div>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-drug" class="label-field">Cyclophosphamide</p>
-                <p class="label-drug-volume" class="label-field">Volume</p>
+                <p class="label-drug label-field">Cyclophosphamide</p>
+                <p class="label-drug-volume label-field">Volume</p>
               </div>
               <div class="flex-row">
                 <p class="label-drug-diluent" class="label-field">in 0.9% Sodium Chloride</p>
                 <p class="label-drug-diluent-volume" class="label-field">Volume</p>
               </div>
               <p class="label-total-volume">Total volume: </p>
-              <p class="label-drug-rate" class="label-field">Rate: </p>
-              <p class="label-drug-frequency" class="label-field">Infuse once, over 1 hour</p>
+              <p class="label-drug-rate label-field">Rate: </p>
+              <p class="label-drug-frequency label-field">Infuse once, over 1 hour</p>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-expiration-datetime" class="label-field">Exp: </p>
-                <p class="label-preparation-datetime" class="label-field">Prep: </p>
+                <p class="label-expiration-datetime label-field">Exp: </p>
+                <p class="label-preparation-datetime label-field">Prep: </p>
               </div>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-verifier" class="label-field">Verify: </p>
-                <p class="label-filler" class="label-field">Fill: ____</p>
-                <p class="label-checker" class="label-field">Check: ____ </p>
+                <p class="label-verifier label-field">Verify: </p>
+                <p class="label-filler label-field">Fill: ____</p>
+                <p class="label-checker label-field">Check: ____ </p>
               </div>
             </section>
           </div>
           <div class="lower-half">
             <footer>
-              <p class="label-compounding-notice">***For compounding only***</p>
+              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
               <section>
                 <div class="flex-row">
-                  <p class="label-patient-name" class="label-field">Patient name</p>
-                  <p class="label-patient-dob" class="label-field">DoB: </p>
-                </div>
-                <div class="flex-row">
-                  <p class="label-patient-mrn" class="label-field">MRN: </p>
-                  <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                  <p class="label-patient-name label-field">Patient name</p>
+                  <p class="label-patient-dob label-field">DoB: </p>
                 </div>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding" class="label-field">Cyclophosphamide 500 mG / 25 mL vial</p>
-                  <p class="label-drug-volume compounding" class="label-field">Volume</p>
+                  <p class="label-drug compounding label-field">Cyclophosphamide 500 mG / 25 mL vial</p>
+                  <p class="label-drug-volume compounding label-field">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding" class="label-field">0.9% Sodium Chloride bag</p>
-                  <p class="label-drug-diluent-volume compounding" class="label-field">Diluent volume</p>
+                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride bag</p>
+                  <p class="label-drug-diluent-volume compounding label-field">Volume</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-expiration-datetime" class="label-field">Exp: </p>
-                  <p class="label-preparation-datetime" class="label-field">Prep: </p>
+                  <p class="label-expiration-datetime label-field">Exp: </p>
+                  <p class="label-preparation-datetime label-field">Prep: </p>
                 </div>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-verifier" class="label-field">Verify: </p>
-                  <p class="label-filler" class="label-field">Fill: ____</p>
-                  <p class="label-checker" class="label-field">Check: ____ </p>
+                  <p class="label-verifier label-field">Verify: </p>
+                  <p class="label-filler label-field">Fill: ____</p>
+                  <p class="label-checker label-field">Check: ____ </p>
                 </div>
               </section>
             </footer>
@@ -162,76 +156,68 @@
             </header>
             <section>
               <div class="flex-row">
-                <p class="label-patient-name" class="label-field">Patient name</p>
-                <p class="label-patient-dob" class="label-field">DoB: </p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn" class="label-field">MRN: </p>
-                <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                <p class="label-patient-name label-field">Patient name</p>
+                <p class="label-patient-dob label-field">DoB: </p>
               </div>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-drug" class="label-field">Mesna</p>
-                <p class="label-drug-volume" class="label-field">Volume</p>
+                <p class="label-drug label-field ">Mesna</p>
+                <p class="label-field label-drug-volume">Volume</p>
               </div>
               <div class="flex-row">
-                <p class="label-drug-diluent" class="label-field">in 0.9% Sodium Chloride</p>
-                <p class="label-drug-diluent-volume" class="label-field">50 mL</p>
+                <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
+                <p class="label-drug-diluent-volume label-field">50 mL</p>
               </div>
               <p class="label-total-volume">Total volume: </p>
-              <p class="label-drug-rate" class="label-field">Rate: </p>
-              <p class="label-drug-frequency" class="label-field">Infuse once, over 15 minutes</p>
+              <p class="label-drug-rate label-field">Rate: </p>
+              <p class="label-drug-frequency label-field">Infuse once, over 15 minutes</p>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-expiration-datetime" class="label-field">Exp: </p>
-                <p class="label-preparation-datetime" class="label-field">Prep: </p>
+                <p class="label-expiration-datetime label-field">Exp: </p>
+                <p class="label-preparation-datetime label-field">Prep: </p>
               </div>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-verifier" class="label-field">Verify: </p>
-                <p class="label-filler" class="label-field">Fill: ____</p>
-                <p class="label-checker" class="label-field">Check: ____ </p>
+                <p class="label-verifier label-field">Verify: </p>
+                <p class="label-filler label-field">Fill: ____</p>
+                <p class="label-checker label-field">Check: ____ </p>
               </div>
             </section>
           </div>
           <div class="lower-half">
             <footer>
-              <p class="label-compounding-notice">***For compounding only***</p>
+              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
               <section>
                 <div class="flex-row">
-                  <p class="label-patient-name" class="label-field">Patient name</p>
-                  <p class="label-patient-dob" class="label-field">DoB: </p>
-                </div>
-                <div class="flex-row">
-                  <p class="label-patient-mrn" class="label-field">MRN: </p>
-                  <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                  <p class="label-patient-name label-field">Patient name</p>
+                  <p class="label-patient-dob label-field">DoB: </p>
                 </div>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding" class="label-field">Mesna 1,000 mG / 10 mL vial</p>
-                  <p class="label-drug-volume compounding" class="label-field">Volume</p>
+                  <p class="label-drug compounding label-field">Mesna 1,000 mG / 10 mL vial</p>
+                  <p class="label-drug-volume compounding label-field">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding" class="label-field">0.9% Sodium Chloride bag</p>
-                  <p class="label-drug-diluent-volume compounding" class="label-field">50 mL</p>
+                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
+                  <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-expiration-datetime" class="label-field">Exp: </p>
-                  <p class="label-preparation-datetime" class="label-field">Prep: </p>
+                  <p class="label-expiration-datetime label-field">Exp: </p>
+                  <p class="label-preparation-datetime label-field">Prep: </p>
                 </div>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-verifier" class="label-field">Verify: </p>
+                  <p class="label-verifier label-field">Verify: </p>
                   <p class="label-filler" class="label-field">Fill: ____</p>
-                  <p class="label-checker" class="label-field">Check: ____</p>
+                  <p class="label-checker label-field">Check: ____</p>
                 </div>
               </section>
             </footer>
@@ -252,22 +238,18 @@
             </header>
             <section>
               <div class="flex-row">
-                <p class="label-patient-name" class="label-field">Patient name</p>
-                <p class="label-patient-dob" class="label-field">DoB: </p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn" class="label-field">MRN: </p>
-                <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                <p class="label-patient-name label-field">Patient name</p>
+                <p class="label-patient-dob label-field">DoB: </p>
               </div>
             </section>
             <section>
               <div class="flex-row">
-                <p class="label-drug" class="label-field">Granisetron</p>
-                <p class="label-drug-volume" class="label-field">Volume</p>
+                <p class="label-drug label-field">Granisetron</p>
+                <p class="label-drug-volume label-field">Volume</p>
               </div>
               <div class="flex-row">
-                <p class="label-drug-diluent" class="label-field">in 0.9% Sodium Chloride</p>
-                <p class="label-drug-diluent-volume" class="label-field">50 mL</p>
+                <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
+                <p class="label-drug-diluent-volume label-field">50 mL</p>
               </div>
               <p class="label-total-volume">Total volume: </p>
               <p class="label-drug-rate" class="label-field">Rate: </p>
@@ -289,25 +271,21 @@
           </div>
           <div class="lower-half">
             <footer>
-              <p class="label-compounding-notice">***For compounding only***</p>
+              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
               <section>
                 <div class="flex-row">
-                  <p class="label-patient-name" class="label-field">Patient name</p>
-                  <p class="label-patient-dob" class="label-field">DoB: </p>
-                </div>
-                <div class="flex-row">
-                  <p class="label-patient-mrn" class="label-field">MRN: </p>
-                  <p class="label-patient-visit-id" class="label-field">Visit: </p>
+                  <p class="label-patient-name label-field">Patient name</p>
+                  <p class="label-patient-dob label-field">DoB: </p>
                 </div>
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding" class="label-field">Granisetron 1 mG / 1 mL vial</p>
-                  <p class="label-drug-volume compounding" class="label-field">Volume</p>
+                  <p class="label-drug compounding label-field">Granisetron 1 mG / 1 mL vial</p>
+                  <p class="label-drug-volume compounding label-field">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding" class="label-field">0.9% Sodium Chloride bag</p>
-                  <p class="label-drug-diluent-volume compounding" class="label-field">50 mL</p>
+                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
+                  <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
               </section>

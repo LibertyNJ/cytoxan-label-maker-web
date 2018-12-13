@@ -59,7 +59,7 @@
 
 .label {
   color: black;
-  font: 8pt/1.125 sans-serif;
+  font: 8pt/1.3 sans-serif;
   margin: 0 auto;
 }
 
@@ -72,6 +72,7 @@
 .label-compounding-notice {
   border: 1px solid black;
   font: bold 10pt/1.25 sans-serif;
+  letter-spacing: .05em;
   text-align: center;
 }
 
@@ -79,6 +80,7 @@
 .label-drug-diluent,
 .label-drug-rate,
 .label-expiration-datetime,
+.label-drug-frequency,
 .label-hospital-name,
 .label-patient-name {
   font-weight: bold;
@@ -238,6 +240,17 @@
 
   /* Layout */
 
+  #label-information {
+    grid-area: form;
+  }
+
+  #label-preview {
+    grid-area: preview;
+    height: auto;
+    position: sticky;
+    top: 0;
+  }
+
   body {
     display: grid;
     gap: var(--vertical-rhythm);
@@ -285,44 +298,10 @@
     top: 0;
   }
 
-  #label-information {
-    grid-area: form;
-  }
-
-  #label-preview {
-    grid-area: preview;
-    height: auto;
-    position: sticky;
-    top: 0;
-  }
-
   /* Module */
 
-  #label-preview-row {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .form-control {
-    margin: 0 calc( .5 * var(--vertical-rhythm) );
-  }
-
-  .form-control>label {
-    display: block;
-  }
-
-  .form-row {
-    display: flex;
-    justify-content: start;
-  }
-
-  .stength-units {
-
-  }
-
-  .drug-strength {
-    text-align: right;
-    width: 5em;
+  #copies {
+    width: 3em;
   }
 
   #help {
@@ -345,6 +324,39 @@
     border: 1px inset var(--northwell-light-blue);
   }
 
+  #label-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #logo {
+    display: block;
+    height: calc(2 * var(--vertical-rhythm));
+    margin-left: var(--vertical-rhythm);
+  }
+
+  #patient-middle-initial {
+    width: 2em;
+  }
+
+  .drug-strength {
+    text-align: right;
+    width: 5em;
+  }
+
+  .form-control {
+    margin: 0 calc( .5 * var(--vertical-rhythm) );
+  }
+
+  .form-control>label {
+    display: block;
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: start;
+  }
+
   .label {
     background: gray;
     border: 1px solid black;
@@ -365,20 +377,9 @@
     border-top: 1px dotted gray;
   }
 
-  #logo {
-    display: block;
-    height: calc(2 * var(--vertical-rhythm));
-    margin-left: var(--vertical-rhythm);
-  }
-
-  #patient-middle-initial {
-    width: 2em;
-  }
-
   /* State */
 
   .hidden {
     display: none;
   }
-
 }
