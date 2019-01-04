@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'a1';
+const VERSION_NUMBER = 'a2';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
@@ -79,8 +79,8 @@ function updateLabel() {
     get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
     get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
     get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
-    get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
-    get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
+    get hours() { return (this.full.getHours() || this.full.getHours() === 0) ? padLeadingZeros(this.full.getHours(), 2) : '' },
+    get minutes() { return (this.full.getMinutes() || this.full.getMinutes() === 0) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
   };
 
   const expirationDate = {
@@ -88,8 +88,8 @@ function updateLabel() {
     get month() { return (this.full.getMonth() || this.full.getMonth() === 0) ? padLeadingZeros(this.full.getMonth() + 1, 2) : '' },
     get date() { return (this.full.getDate()) ? padLeadingZeros(this.full.getDate(), 2) : '' },
     get year() { return (this.full.getFullYear()) ? padLeadingZeros(this.full.getFullYear(), 4) : '' },
-    get hours() { return (this.full.getHours()) ? padLeadingZeros(this.full.getHours(), 2) : '' },
-    get minutes() { return (this.full.getMinutes()) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
+    get hours() { return (this.full.getHours() || this.full.getHours() === 0) ? padLeadingZeros(this.full.getHours(), 2) : '' },
+    get minutes() { return (this.full.getMinutes() || this.full.getMinutes() === 0) ? padLeadingZeros(this.full.getMinutes(), 2) : '' }
   };
 
   const verifier = getElementValueById('verifier');
