@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION_NUMBER = 'a2';
+const VERSION_NUMBER = 'b1';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
@@ -32,6 +32,8 @@ function updateLabel() {
       first: getElementValueById('patient-first-name'),
       middleInitial: getElementValueById('patient-middle-initial')
     },
+
+    mrn: getElementValueById('patient-mrn'),
 
     dob: {
       full: new Date(getElementValueById('patient-dob') + 'T00:00:00'),
@@ -124,6 +126,7 @@ function updateLabel() {
   };
 
   const patientNameLabelElements = document.querySelectorAll('.label-patient-name');
+  const patientMRNLabelElements = document.querySelectorAll('.label-patient-mrn');
   const patientDobLabelElements = document.querySelectorAll('.label-patient-dob');
 
   const expirationDateLabelElements = document.querySelectorAll('.label-expiration-datetime');
@@ -202,6 +205,10 @@ function updateLabel() {
 
   for (let element of patientNameLabelElements) {
     element.textContent = (!patient.name.last && !patient.name.first && !patient.name.middleInitial) ? 'Patient name' : `${patient.name.last}${(patient.name.last && patient.name.first) ? ',' : ''} ${patient.name.first} ${patient.name.middleInitial}${(patient.name.middleInitial) ? '.' : ''}`;
+  }
+
+  for (let element of patientMRNLabelElements) {
+    element.textContent = `MRN: ${patient.mrn}`;
   }
 
   for (let element of patientDobLabelElements) {
