@@ -17,68 +17,118 @@
   </header>
   <section id="label-information">
     <h2>Label information</h2>
-    <form>
+    <form class="form">
       <section id="patient">
         <h3>Patient</h3>
         <fieldset>
           <legend>Name</legend>
-          <div class="form-control">
+          <div class="form__control">
             <label for="patient-last-name">Last</label>
             <input type="text" id="patient-last-name" name="patient-last-name" placeholder="Doe…" required>
           </div>
-          <div class="form-control">
+          <div class="form__control">
             <label for="patient-first-name">First</label>
             <input type="text" id="patient-first-name" name="patient-first-name" placeholder="John…" required>
           </div>
-          <div class="form-control">
+          <div class="form__control">
             <label for="patient-middle-initial">M.I.</label>
-            <input type="text" id="patient-middle-initial" class=" optional" name="patient-middle-initial" maxlength="1"
+            <input type="text" id="patient-middle-initial" class="optional" name="patient-middle-initial" maxlength="1"
               placeholder="G…">
           </div>
         </fieldset>
-        <div class="form-control">
+        <div class="form__control">
           <label for="patient-mrn">MRN</label>
           <input type="text" id="patient-mrn" name="patient-mrn" maxlength="8" placeholder="12345678…" required>
         </div>
-        <div class="form-control">
+        <div class="form__control">
           <label for="patient-dob">Date of birth</label>
           <input type="date" id="patient-dob" name="patient-dob" max="9999-12-31" required>
         </div>
       </section>
       <section id="medications">
         <h3>Medications</h3>
-        <section id="cyclophosphamide">
+        <fieldset>
+          <legend>Medications needed</legend>
+          <div class="form__control-toggle">
+            <label for="cyclophosphamide-checkbox"><input type="checkbox" id="cyclophosphamide-checkbox" class="medication-selector cyclophosphamide" name="cyclophosphamide-checkbox"> Cyclophosphamide</label>
+          </div>
+          <div class="form__control-toggle">
+            <label for="mesna-checkbox"><input type="checkbox" id="mesna-checkbox" class="medication-selector mesna" name="mesna-checkbox"> Mesna</label>
+          </div>
+          <div class="form__control-toggle">
+            <label for="granisetron-checkbox"><input type="checkbox" id="granisetron-checkbox" class="medication-selector granisetron" name="granisetron-checkbox"> Granisetron</label>
+          </div>
+        </fieldset>
+        <section id="cyclophosphamide" class="cyclophosphamide">
           <h4>Cyclophosphamide</h4>
-          <div class="form-control">
+          <div class="form__control">
             <label for="cyclophosphamide-strength">Strength</label>
             <input type="number" name="cyclophosphamide-strength" id="cyclophosphamide-strength" class="drug-strength"
-              min="1" placeholder="500…" required> <span class="strength-units">mG</span>
+              min="1" placeholder="500…" required> <span class="field-units">mG</span>
+          </div>
+          <div class="form__control">
+              <label for="cyclophosphamide-infusion-time">Infusion time</label>
+              <input type="number" name="cyclophosphamide-infusion-time" id="cyclophosphamide-infusion-time" class="drug-infusion-time"
+                min="1" placeholder="60…" required> <span class="field-units">minute(s)</span>
+            </div>
+          <div class="form__control">
+            <label for="cyclophosphamide-override-infusion-time"><input type="checkbox" class="override-infusion-time cyclophosphamide" name="cyclophosphamide-override-infusion-time" id="cyclophosphamide-override-infusion-time"> Override infusion time</label>
+          </div>
+          <div class="form__control">
+            <label for="cyclophosphamide-special-instructions">Special instructions</label>
+            <textarea name="cyclophosphamide-special-instructions" id="cyclophosphamide-special-instructions" cols="30"
+              rows="4" placeholder="Type special instructions here (optional)…"></textarea>
           </div>
         </section>
-        <section id="mesna">
+        <section id="mesna" class="mesna">
           <h4>Mesna</h4>
-          <div class="form-control">
+          <div class="form__control">
             <label for="mesna-strength">Strength</label>
             <input type="number" name="mesna-strength" id="mesna-strength" class="drug-strength" min="1" placeholder="250…"
-              required> <span class="strength-units">mG</span>
+              required> <span class="field-units">mG</span>
+          </div>
+          <div class="form__control">
+              <label for="mesna-infusion-time">Infusion time</label>
+              <input type="number" name="mesna-infusion-time" id="mesna-infusion-time" class="drug-infusion-time" min="1" placeholder="15…"
+                required> <span class="field-units">minute(s)</span>
+            </div>
+          <div class="form__control">
+            <label for="mesna-override-infusion-time"><input type="checkbox" class="override-infusion-time mesna" name="mesna-override-infusion-time" id="mesna-override-infusion-time"> Override infusion time</label>
+          </div>
+          <div class="form__control">
+            <label for="mesna-special-instructions">Special instructions</label>
+            <textarea name="mesna-special-instructions" id="mesna-special-instructions" cols="30" rows="4" placeholder="Type special instructions here (optional)…"></textarea>
           </div>
         </section>
-        <section id="granisetron">
+        <section id="granisetron" class="granisetron">
           <h4>Granisetron</h4>
-          <div class="form-control">
+          <div class="form__control">
             <label for="granisetron-strength">Strength</label>
             <input type="number" name="granisetron-strength" id="granisetron-strength" class="drug-strength" min="1"
-              placeholder="1…" required> <span class="strength-units">mG</span>
+              placeholder="1…" required> <span class="field-units">mG</span>
+          </div>
+          <div class="form__control">
+              <label for="granisetron-infusion-time">Infusion time</label>
+              <input type="number" name="granisetron-infusion-time" id="granisetron-infusion-time" class="drug-infusion-time" min="1"
+                placeholder="30…" required> <span class="field-units">minute(s)</span>
+            </div>
+          <div class="form__control">
+            <label for="granisetron-override-infusion-time"><input type="checkbox" class="override-infusion-time mesna" name="granisetron-override-infusion-time" id="granisetron-override-infusion-time"> Override infusion time</label>
+          </div>
+          <div class="form__control">
+            <label for="granisetron-special-instructions">Special instructions</label>
+            <textarea name="granisetron-special-instructions" id="granisetron-special-instructions" cols="30" rows="4"
+              placeholder="Type special instructions here (optional)…"></textarea>
           </div>
         </section>
       </section>
       <section id="verifier-and-preparation">
         <h3>Verifier and preparation</h3>
-        <div class="form-control">
+        <div class="form__control">
           <label for="verifier">Verifier</label>
           <input type="text" id="verifier" name="verifier" min="1" placeholder="Soandso, RPh…" required>
         </div>
-        <div class="form-control">
+        <div class="form__control">
           <label for="preparation-datetime">Preparation date & time</label>
           <input type="datetime-local" id="preparation-datetime" name="preparation-datetime" max="9999-12-31T23:59"
             required>
@@ -86,7 +136,7 @@
       </section>
       <section id="options-and-print">
         <h3>Options and print</h3>
-        <div class="form-control">
+        <div class="form__control">
           <label for="copies">Copies</label>
           <input type="number" id="copies" name="copies" min="1" placeholder="1…" required>
         </div>
@@ -97,7 +147,7 @@
   <section id="label-preview">
     <h2>Label preview</h2>
     <div id="label-row">
-      <article id="cyclophosphamide-label" class="label">
+      <article id="cyclophosphamide-label" class="label cyclophosphamide">
         <div class="label-body">
           <div class="upper-half">
             <header>
@@ -185,7 +235,7 @@
           </div>
         </div>
       </article>
-      <article id="mesna-label" class="label">
+      <article id="mesna-label" class="label mesna">
         <div class="label-body">
           <div class="upper-half">
             <header>
@@ -273,7 +323,7 @@
           </div>
         </div>
       </article>
-      <article id="granisetron-label" class="label">
+      <article id="granisetron-label" class="label granisetron">
         <div class="label-body">
           <div class="upper-half">
             <header>
@@ -365,7 +415,7 @@
   </section>
   <footer>
     <img id="logo" src="assets/images/nsuh-nwh-logo-inverted.png" alt="North Shore University Hospital Logo">
-    <address><span id="version">Version 1.0</span>. Created by Nathaniel J. Liberty, 2018. <br>
+    <address><span id="version">Version 0.0.0</span>. Created by Nathaniel J. Liberty, 2018. <br>
       Email <a href="mailto:nliberty@northwell.edu?subject=Cytoxan%20Label%20Creator">nliberty@northwell.edu</a> with
       comments, questions, or bug reports.</address>
   </footer>

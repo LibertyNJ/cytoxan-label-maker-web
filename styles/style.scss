@@ -176,7 +176,7 @@
     font: 1.435rem/1.75 'Montserrat', sans-serif;
   }
 
-  .strength-units {
+  .field-units {
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -345,18 +345,26 @@
     }
   }
 
-  .drug-strength {
-    text-align: right;
-    width: 5em;
+  .drug {
+    &-infusion-time,
+    &-strength {
+      text-align: right;
+      width: 5em;
+    }
   }
 
   .form {
-    &-control {
+    &__control {
       margin: 0 #{.5 * $vertical-rhythm}rem;
 
       >label {
         display: block;
       }
+    }
+
+    &__control-toggle {
+      display: block;
+      margin: 0 #{.5 * $vertical-rhythm}rem;
     }
 
     &-row {

@@ -1,10 +1,12 @@
 'use strict';
 
-const VERSION_NUMBER = 'b1';
+const VERSION_NUMBER = 'b2';
 const versionElement = document.getElementById('version');
 versionElement.textContent = `Version ${VERSION_NUMBER}`;
 
 const formElement = document.getElementsByTagName('form')[0];
+const formControlElements = document.querySelectorAll('.form__control');
+const labelElements = document.querySelectorAll('.label');
 
 formElement.addEventListener('input', (event) => formInputHandler(event));
 formElement.addEventListener('submit', (event) => formSubmitHandler(event));
@@ -16,7 +18,23 @@ function getElementValueById(id) {
   return document.getElementById(id).value;
 }
 
-function formInputHandler() {
+function formInputHandler(event) {
+  const target = event.target;
+
+  if (target.classList.contains('medication-selector')) {
+    const selectedMedication = target.classList.item(1);
+
+    if (target.checked === true) {
+      labelElements.forEach((label) => {
+
+        if (label.classList.contains(selectedMedication)) {
+          label.classList.add('hidden');
+        }
+      })
+    } else {
+      
+    }
+  }
   updateLabel();
 }
 
