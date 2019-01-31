@@ -7,6 +7,8 @@ versionElement.textContent = `Version ${VERSION_NUMBER}`;
 const formElement = document.getElementsByTagName('form')[0];
 const formControlElements = document.querySelectorAll('.form__control');
 const labelElements = document.querySelectorAll('.label');
+const medicationFormSections = document.getElementById('medications').querySelectorAll('section');
+const drugInfusionTimeInputs = document.querySelectorAll('.drug-infusion-time');
 
 formElement.addEventListener('input', (event) => formInputHandler(event));
 formElement.addEventListener('submit', (event) => formSubmitHandler(event));
@@ -26,15 +28,45 @@ function formInputHandler(event) {
 
     if (target.checked === true) {
       labelElements.forEach((label) => {
+        if (label.classList.contains(selectedMedication)) {
+          label.classList.remove('hidden');
+        }
+      });
 
+      medicationFormSections.forEach((formSection) => {
+        if (formSection.classList.contains(selectedMedication)) {
+          formSection.classList.remove('hidden');
+        }
+      });
+
+    } else {
+      labelElements.forEach((label) => {
         if (label.classList.contains(selectedMedication)) {
           label.classList.add('hidden');
         }
-      })
-    } else {
-      
+      });
+
+      medicationFormSections.forEach((formSection) => {
+        if (formSection.classList.contains(selectedMedication)) {
+          formSection.classList.add('hidden');
+        }
+      });
+    }
+  } else if (target.classList.contains('override-infusion-time')) {
+    const selectedMedication = target.classList.item(1);
+
+    if (target.checked === true) {
+      drugInfusionTimeInputs.forEach((drugInfusionTimeInput) => {
+
+        if (drugInfusionTimeInput.classList.contains(selectedMedication)) {
+
+        } else {
+          drugInfusionTimeInput.setAttribute('required', 'false');
+        }
+      });
     }
   }
+
   updateLabel();
 }
 
@@ -170,7 +202,7 @@ function updateLabel() {
   for (let labelField of cyclophosphamideLabel.totalVolume) {
     labelField.textContent = (cyclophosphamide.strength) ?
       `Total volume: ${formatNumberForMedicationSafety(cyclophosphamide.totalVolume)} mL` :
-      'Total volume';
+      'Total volume:';
   }
 
   cyclophosphamideLabel.rate.textContent = `Rate: ${(cyclophosphamide.strength) ?
@@ -194,7 +226,7 @@ function updateLabel() {
   for (let labelField of mesnaLabel.totalVolume) {
     labelField.textContent = (mesna.strength) ?
       `Total volume: ${formatNumberForMedicationSafety(mesna.totalVolume)} mL` :
-      'Total volume';
+      'Total volume:';
   }
 
   mesnaLabel.rate.textContent = `Rate: ${(mesna.strength) ?
@@ -214,7 +246,7 @@ function updateLabel() {
   for (let labelField of granisetronLabel.totalVolume) {
     labelField.textContent = (granisetron.strength) ?
       `Total volume: ${formatNumberForMedicationSafety(granisetron.totalVolume)} mL` :
-      'Total volume';
+      'Total volume:';
   }
 
   granisetronLabel.rate.textContent = `Rate: ${(granisetron.strength) ?

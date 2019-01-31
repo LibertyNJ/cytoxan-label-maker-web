@@ -50,29 +50,35 @@
         <fieldset>
           <legend>Medications needed</legend>
           <div class="form__control-toggle">
-            <label for="cyclophosphamide-checkbox"><input type="checkbox" id="cyclophosphamide-checkbox" class="medication-selector cyclophosphamide" name="cyclophosphamide-checkbox"> Cyclophosphamide</label>
+            <label for="cyclophosphamide-checkbox"><input type="checkbox" id="cyclophosphamide-checkbox" class="medication-selector cyclophosphamide"
+                name="cyclophosphamide-checkbox"> Cyclophosphamide</label>
           </div>
           <div class="form__control-toggle">
-            <label for="mesna-checkbox"><input type="checkbox" id="mesna-checkbox" class="medication-selector mesna" name="mesna-checkbox"> Mesna</label>
+            <label for="mesna-checkbox"><input type="checkbox" id="mesna-checkbox" class="medication-selector mesna"
+                name="mesna-checkbox"> Mesna</label>
           </div>
           <div class="form__control-toggle">
-            <label for="granisetron-checkbox"><input type="checkbox" id="granisetron-checkbox" class="medication-selector granisetron" name="granisetron-checkbox"> Granisetron</label>
+            <label for="granisetron-checkbox"><input type="checkbox" id="granisetron-checkbox" class="medication-selector granisetron"
+                name="granisetron-checkbox"> Granisetron</label>
           </div>
         </fieldset>
-        <section id="cyclophosphamide" class="cyclophosphamide">
+        <section id="cyclophosphamide" class="cyclophosphamide hidden">
           <h4>Cyclophosphamide</h4>
           <div class="form__control">
             <label for="cyclophosphamide-strength">Strength</label>
             <input type="number" name="cyclophosphamide-strength" id="cyclophosphamide-strength" class="drug-strength"
               min="1" placeholder="500…" required> <span class="field-units">mG</span>
           </div>
+          <div class="form__control hidden">
+            <label for="cyclophosphamide-infusion-time">Infusion time</label>
+            <input type="number" name="cyclophosphamide-infusion-time" id="cyclophosphamide-infusion-time" class="drug-infusion-time"
+              min="1" placeholder="60…"> <span class="field-units">minute(s)</span>
+          </div>
           <div class="form__control">
-              <label for="cyclophosphamide-infusion-time">Infusion time</label>
-              <input type="number" name="cyclophosphamide-infusion-time" id="cyclophosphamide-infusion-time" class="drug-infusion-time"
-                min="1" placeholder="60…" required> <span class="field-units">minute(s)</span>
-            </div>
-          <div class="form__control">
-            <label for="cyclophosphamide-override-infusion-time"><input type="checkbox" class="override-infusion-time cyclophosphamide" name="cyclophosphamide-override-infusion-time" id="cyclophosphamide-override-infusion-time"> Override infusion time</label>
+            <label for="cyclophosphamide-override-infusion-time">
+              <input type="checkbox" class="override-infusion-time cyclophosphamide" name="cyclophosphamide-override-infusion-time"
+                id="cyclophosphamide-override-infusion-time"> Override infusion time
+            </label>
           </div>
           <div class="form__control">
             <label for="cyclophosphamide-special-instructions">Special instructions</label>
@@ -80,40 +86,47 @@
               rows="4" placeholder="Type special instructions here (optional)…"></textarea>
           </div>
         </section>
-        <section id="mesna" class="mesna">
+        <section id="mesna" class="mesna hidden">
           <h4>Mesna</h4>
           <div class="form__control">
             <label for="mesna-strength">Strength</label>
             <input type="number" name="mesna-strength" id="mesna-strength" class="drug-strength" min="1" placeholder="250…"
               required> <span class="field-units">mG</span>
           </div>
+          <div class="form__control hidden">
+            <label for="mesna-infusion-time">Infusion time</label>
+            <input type="number" name="mesna-infusion-time" id="mesna-infusion-time" class="drug-infusion-time" min="1"
+              placeholder="15…"> <span class="field-units">minute(s)</span>
+          </div>
           <div class="form__control">
-              <label for="mesna-infusion-time">Infusion time</label>
-              <input type="number" name="mesna-infusion-time" id="mesna-infusion-time" class="drug-infusion-time" min="1" placeholder="15…"
-                required> <span class="field-units">minute(s)</span>
-            </div>
-          <div class="form__control">
-            <label for="mesna-override-infusion-time"><input type="checkbox" class="override-infusion-time mesna" name="mesna-override-infusion-time" id="mesna-override-infusion-time"> Override infusion time</label>
+            <label for="mesna-override-infusion-time">
+              <input type="checkbox" class="override-infusion-time mesna" name="mesna-override-infusion-time" id="mesna-override-infusion-time">
+              Override infusion time
+            </label>
           </div>
           <div class="form__control">
             <label for="mesna-special-instructions">Special instructions</label>
             <textarea name="mesna-special-instructions" id="mesna-special-instructions" cols="30" rows="4" placeholder="Type special instructions here (optional)…"></textarea>
           </div>
         </section>
-        <section id="granisetron" class="granisetron">
+        <section id="granisetron" class="granisetron hidden">
           <h4>Granisetron</h4>
           <div class="form__control">
             <label for="granisetron-strength">Strength</label>
             <input type="number" name="granisetron-strength" id="granisetron-strength" class="drug-strength" min="1"
               placeholder="1…" required> <span class="field-units">mG</span>
           </div>
+          <div class="form__control hidden">
+            <label for="granisetron-infusion-time">Infusion time</label>
+            <input type="number" name="granisetron-infusion-time" id="granisetron-infusion-time" class="drug-infusion-time"
+              min="1" placeholder="30…"> <span class="field-units">minute(s)</span>
+          </div>
           <div class="form__control">
-              <label for="granisetron-infusion-time">Infusion time</label>
-              <input type="number" name="granisetron-infusion-time" id="granisetron-infusion-time" class="drug-infusion-time" min="1"
-                placeholder="30…" required> <span class="field-units">minute(s)</span>
-            </div>
-          <div class="form__control">
-            <label for="granisetron-override-infusion-time"><input type="checkbox" class="override-infusion-time mesna" name="granisetron-override-infusion-time" id="granisetron-override-infusion-time"> Override infusion time</label>
+            <label for="granisetron-override-infusion-time">
+              <input type="checkbox" class="override-infusion-time mesna" name="granisetron-override-infusion-time" id="granisetron-override-infusion-time">
+              Override infusion
+              time
+            </label>
           </div>
           <div class="form__control">
             <label for="granisetron-special-instructions">Special instructions</label>
@@ -147,7 +160,7 @@
   <section id="label-preview">
     <h2>Label preview</h2>
     <div id="label-row">
-      <article id="cyclophosphamide-label" class="label cyclophosphamide">
+      <article id="cyclophosphamide-label" class="label cyclophosphamide hidden">
         <div class="label-body">
           <div class="upper-half">
             <header>
@@ -235,7 +248,7 @@
           </div>
         </div>
       </article>
-      <article id="mesna-label" class="label mesna">
+      <article id="mesna-label" class="label mesna hidden">
         <div class="label-body">
           <div class="upper-half">
             <header>
@@ -323,7 +336,7 @@
           </div>
         </div>
       </article>
-      <article id="granisetron-label" class="label granisetron">
+      <article id="granisetron-label" class="label granisetron hidden">
         <div class="label-body">
           <div class="upper-half">
             <header>
