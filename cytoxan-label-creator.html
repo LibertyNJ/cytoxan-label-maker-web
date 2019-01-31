@@ -8,209 +8,240 @@
   <title>Cytoxan Label Creator</title>
   <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="styles/style.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <header>
-    <a href="help.html" target="_blank" id="help"><button id="help-button">Help</button></a>
-    <h1>Cytoxan Label Creator</h1>
+  <header class="container-fluid p-3 mb-3">
+    <a href="help.html" target="_blank" id="help"><button class="btn btn-lg btn-secondary float-right" id="help-button">Help</button></a>
+    <h1 class="text-center text-primary">Cytoxan Label Creator</h1>
   </header>
-  <section id="label-information">
-    <h2>Label information</h2>
-    <form class="form">
-      <section id="patient">
-        <h3>Patient</h3>
-        <fieldset>
-          <legend>Name</legend>
-          <div class="form__control">
-            <label for="patient-last-name">Last</label>
-            <input type="text" id="patient-last-name" name="patient-last-name" placeholder="Doe…" required>
-          </div>
-          <div class="form__control">
-            <label for="patient-first-name">First</label>
-            <input type="text" id="patient-first-name" name="patient-first-name" placeholder="John…" required>
-          </div>
-          <div class="form__control">
-            <label for="patient-middle-initial">M.I.</label>
-            <input type="text" id="patient-middle-initial" class="optional" name="patient-middle-initial" maxlength="1"
-              placeholder="G…">
-          </div>
-        </fieldset>
-        <div class="form__control">
-          <label for="patient-mrn">MRN</label>
-          <input type="text" id="patient-mrn" name="patient-mrn" maxlength="8" placeholder="12345678…" required>
-        </div>
-        <div class="form__control">
-          <label for="patient-dob">Date of birth</label>
-          <input type="date" id="patient-dob" name="patient-dob" max="9999-12-31" required>
-        </div>
-      </section>
-      <section id="medications">
-        <h3>Medications</h3>
-        <fieldset>
-          <legend>Medications needed</legend>
-          <div class="form__control-toggle">
-            <label for="cyclophosphamide-checkbox"><input type="checkbox" id="cyclophosphamide-checkbox" class="medication-selector cyclophosphamide"
-                name="cyclophosphamide-checkbox"> Cyclophosphamide</label>
-          </div>
-          <div class="form__control-toggle">
-            <label for="mesna-checkbox"><input type="checkbox" id="mesna-checkbox" class="medication-selector mesna"
-                name="mesna-checkbox"> Mesna</label>
-          </div>
-          <div class="form__control-toggle">
-            <label for="granisetron-checkbox"><input type="checkbox" id="granisetron-checkbox" class="medication-selector granisetron"
-                name="granisetron-checkbox"> Granisetron</label>
-          </div>
-        </fieldset>
-        <section id="cyclophosphamide" class="cyclophosphamide hidden">
-          <h4>Cyclophosphamide</h4>
-          <div class="form__control">
-            <label for="cyclophosphamide-strength">Strength</label>
-            <input type="number" name="cyclophosphamide-strength" id="cyclophosphamide-strength" class="drug-strength"
-              min="1" placeholder="500…" required> <span class="field-units">mG</span>
-          </div>
-          <div class="form__control hidden">
-            <label for="cyclophosphamide-infusion-time">Infusion time</label>
-            <input type="number" name="cyclophosphamide-infusion-time" id="cyclophosphamide-infusion-time" class="drug-infusion-time"
-              min="1" placeholder="60…"> <span class="field-units">minute(s)</span>
-          </div>
-          <div class="form__control">
-            <label for="cyclophosphamide-override-infusion-time">
-              <input type="checkbox" class="override-infusion-time cyclophosphamide" name="cyclophosphamide-override-infusion-time"
-                id="cyclophosphamide-override-infusion-time"> Override infusion time
-            </label>
-          </div>
-          <div class="form__control">
-            <label for="cyclophosphamide-special-instructions">Special instructions</label>
-            <textarea name="cyclophosphamide-special-instructions" id="cyclophosphamide-special-instructions" cols="30"
-              rows="4" placeholder="Type special instructions here (optional)…"></textarea>
+  <main class="container-fluid row">
+    <section class="col-4" id="label-information">
+      <h2 class="text-primary">Label information</h2>
+      <form>
+        <section id="patient" class="p-3 border mb-3">
+          <h3 class="text-primary">Patient</h3>
+          <fieldset class="form-group">
+            <legend>Name</legend>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="patient-last-name">Last</label>
+                <input type="text" class="form-control" id="patient-last-name" name="patient-last-name" placeholder="Doe"
+                  required>
+              </div>
+              <div class="form-group col">
+                <label for="patient-first-name">First</label>
+                <input type="text" class="form-control" id="patient-first-name" name="patient-first-name" placeholder="John"
+                  required>
+              </div>
+              <div class="form-group col-2">
+                <label for="patient-middle-initial">M.I.</label>
+                <input type="text" class="form-control" id="patient-middle-initial" name="patient-middle-initial"
+                  maxlength="1" placeholder="G">
+                <small class="form-text text-muted">Optional</small>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="patient-mrn">MRN</label>
+              <input type="text" class="form-control" id="patient-mrn" name="patient-mrn" maxlength="8" placeholder="12345678"
+                required>
+            </div>
+            <div class="form-group col">
+              <label for="patient-dob">Date of birth</label>
+              <input type="date" class="form-control" id="patient-dob" name="patient-dob" max="9999-12-31" required>
+            </div>
           </div>
         </section>
-        <section id="mesna" class="mesna hidden">
-          <h4>Mesna</h4>
-          <div class="form__control">
-            <label for="mesna-strength">Strength</label>
-            <input type="number" name="mesna-strength" id="mesna-strength" class="drug-strength" min="1" placeholder="250…"
-              required> <span class="field-units">mG</span>
-          </div>
-          <div class="form__control hidden">
-            <label for="mesna-infusion-time">Infusion time</label>
-            <input type="number" name="mesna-infusion-time" id="mesna-infusion-time" class="drug-infusion-time" min="1"
-              placeholder="15…"> <span class="field-units">minute(s)</span>
-          </div>
-          <div class="form__control">
-            <label for="mesna-override-infusion-time">
-              <input type="checkbox" class="override-infusion-time mesna" name="mesna-override-infusion-time" id="mesna-override-infusion-time">
-              Override infusion time
-            </label>
-          </div>
-          <div class="form__control">
-            <label for="mesna-special-instructions">Special instructions</label>
-            <textarea name="mesna-special-instructions" id="mesna-special-instructions" cols="30" rows="4" placeholder="Type special instructions here (optional)…"></textarea>
+        <section id="medications" class="p-3 border mb-3">
+          <h3 class="text-primary">Medications</h3>
+          <fieldset class="form-group">
+            <legend>Medications needed</legend>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="cyclophosphamide-checkbox" name="cyclophosphamide-checkbox">
+              <label for="cyclophosphamide-checkbox" class="form-check-label">
+                Cyclophosphamide
+              </label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="mesna-checkbox" name="mesna-checkbox">
+              <label for="mesna-checkbox" class="form-check-label">
+                Mesna
+              </label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="granisetron-checkbox" name="granisetron-checkbox">
+              <label for="granisetron-checkbox" class="form-check-label">
+                Granisetron
+              </label>
+            </div>
+          </fieldset>
+          <section id="cyclophosphamide" class="p-3 border mb-3">
+            <h4 class="text-secondary">Cyclophosphamide</h4>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="cyclophosphamide-strength">Strength</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="cyclophosphamide-strength" id="cyclophosphamide-strength"
+                    min="1" placeholder="500" required>
+                  <div class="input-group-append">
+                    <div class="input-group-text">mG</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col">
+                <label for="cyclophosphamide-infusion-time">Infusion time</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="cyclophosphamide-infusion-time" id="cyclophosphamide-infusion-time"
+                    min="1" placeholder="60" disabled>
+                  <div class="input-group-append">
+                    <span class="input-group-text">min.</span>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" name="cyclophosphamide-override-infusion-time" id="cyclophosphamide-override-infusion-time">
+                  <label class="form-check-label" for="cyclophosphamide-override-infusion-time">
+                    Override infusion time
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cyclophosphamide-special-instructions">Special instructions</label>
+              <textarea class="form-control" name="cyclophosphamide-special-instructions" id="cyclophosphamide-special-instructions"
+                placeholder="Type special instructions here."></textarea>
+              <small class="form-text text-muted">Optional</small>
+            </div>
+          </section>
+          <section id="mesna" class="p-3 border mb-3">
+            <h4 class="text-secondary">Mesna</h4>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="mesna-strength">Strength</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="mesna-strength" id="mesna-strength" min="1"
+                    placeholder="250" required>
+                  <div class="input-group-append">
+                    <span class="input-group-text">mG</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col">
+                <label for="mesna-infusion-time">Infusion time</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="mesna-infusion-time" id="mesna-infusion-time" min="1"
+                    placeholder="15" disabled>
+                  <div class="input-group-append">
+                    <span class="input-group-text">min.</span>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" name="mesna-override-infusion-time" id="mesna-override-infusion-time">
+                  <label class="form-check-label" for="mesna-override-infusion-time">
+                    Override infusion time
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="mesna-special-instructions">Special instructions</label>
+              <textarea class="form-control" name="mesna-special-instructions" id="mesna-special-instructions"
+                placeholder="Type special instructions here."></textarea>
+              <small class="form-text text-muted">Optional</small>
+            </div>
+          </section>
+          <section id="granisetron" class="p-3 border">
+            <h4 class="text-secondary">Granisetron</h4>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="granisetron-strength">Strength</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="granisetron-strength" id="granisetron-strength" min="1"
+                    placeholder="1" required>
+                  <div class="input-group-append">
+                    <span class="input-group-text">mG</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col">
+                <label for="granisetron-infusion-time">Infusion time</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="granisetron-infusion-time" id="granisetron-infusion-time"
+                    min="1" placeholder="30" disabled>
+                  <div class="input-group-append">
+                    <span class="input-group-text">min.</span>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" name="granisetron-override-infusion-time" id="granisetron-override-infusion-time">
+                  <label class="form-check-label" for="granisetron-override-infusion-time">
+                    Override infusion time
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="granisetron-special-instructions">Special instructions</label>
+              <textarea class="form-control" name="granisetron-special-instructions" id="granisetron-special-instructions"
+                placeholder="Type special instructions here."></textarea>
+              <small class="form-text text-muted">Optional</small>
+            </div>
+          </section>
+        </section>
+        <section id="verifier-and-preparation" class="p-3 border mb-3">
+          <h3 class="text-primary">Verifier and preparation</h3>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="verifier">Verifier</label>
+              <input type="text" class="form-control" id="verifier" name="verifier" min="1" placeholder="AB" required>
+            </div>
+            <div class="form-group col">
+              <label for="preparation-datetime">Preparation date & time</label>
+              <input type="datetime-local" class="form-control" id="preparation-datetime" name="preparation-datetime"
+                max="9999-12-31T23:59" required>
+              <small class="form-text text-muted">Time must include AM or PM</small>
+            </div>
           </div>
         </section>
-        <section id="granisetron" class="granisetron hidden">
-          <h4>Granisetron</h4>
-          <div class="form__control">
-            <label for="granisetron-strength">Strength</label>
-            <input type="number" name="granisetron-strength" id="granisetron-strength" class="drug-strength" min="1"
-              placeholder="1…" required> <span class="field-units">mG</span>
-          </div>
-          <div class="form__control hidden">
-            <label for="granisetron-infusion-time">Infusion time</label>
-            <input type="number" name="granisetron-infusion-time" id="granisetron-infusion-time" class="drug-infusion-time"
-              min="1" placeholder="30…"> <span class="field-units">minute(s)</span>
-          </div>
-          <div class="form__control">
-            <label for="granisetron-override-infusion-time">
-              <input type="checkbox" class="override-infusion-time mesna" name="granisetron-override-infusion-time" id="granisetron-override-infusion-time">
-              Override infusion
-              time
-            </label>
-          </div>
-          <div class="form__control">
-            <label for="granisetron-special-instructions">Special instructions</label>
-            <textarea name="granisetron-special-instructions" id="granisetron-special-instructions" cols="30" rows="4"
-              placeholder="Type special instructions here (optional)…"></textarea>
+        <section id="print" class="p-3 border">
+          <h3 class="text-primary">Print</h3>
+          <div class="form-row">
+            <div class="form-group col-5">
+              <label for="copies">Copies</label>
+              <div class="input-group">
+                <input type="number" class="form-control form-control" id="copies" name="copies" min="1" placeholder="1"
+                  required>
+                <div class="input-group-append">
+                  <button class="btn btn-primary btn" type="submit">Print labels</button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-      </section>
-      <section id="verifier-and-preparation">
-        <h3>Verifier and preparation</h3>
-        <div class="form__control">
-          <label for="verifier">Verifier</label>
-          <input type="text" id="verifier" name="verifier" min="1" placeholder="Soandso, RPh…" required>
-        </div>
-        <div class="form__control">
-          <label for="preparation-datetime">Preparation date & time</label>
-          <input type="datetime-local" id="preparation-datetime" name="preparation-datetime" max="9999-12-31T23:59"
-            required>
-        </div>
-      </section>
-      <section id="options-and-print">
-        <h3>Options and print</h3>
-        <div class="form__control">
-          <label for="copies">Copies</label>
-          <input type="number" id="copies" name="copies" min="1" placeholder="1…" required>
-        </div>
-        <button class="print-button" type="submit">Print labels</button>
-      </section>
-    </form>
-  </section>
-  <section id="label-preview">
-    <h2>Label preview</h2>
-    <div id="label-row">
-      <article id="cyclophosphamide-label" class="label cyclophosphamide hidden">
-        <div class="label-body">
-          <div class="upper-half">
-            <header>
-              <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
-              <div class="flex-row">
-                <p>300 Community Drive <br>
-                  Manhasset, NY 11030</p>
-                <p>DEA# AN0768917 <br>
-                  (516)562-4700</p>
-              </div>
-            </header>
-            <section>
-              <div class="flex-row">
-                <p class="label-patient-name label-field">Patient name</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn">MRN: </p>
-                <p class="label-patient-dob label-field">DoB: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-drug label-field">Cyclophosphamide</p>
-                <p class="label-drug-volume label-field">Volume</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-drug-diluent" class="label-field">in 0.9% Sodium Chloride</p>
-                <p class="label-drug-diluent-volume" class="label-field">Volume</p>
-              </div>
-              <p class="label-total-volume">Total volume: </p>
-              <p class="label-drug-rate label-field">Rate: </p>
-              <p class="label-drug-frequency label-field">Infuse once, over 1 hour</p>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-expiration-datetime label-field">Exp: </p>
-                <p class="label-preparation-datetime label-field">Prep: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-verifier label-field">Verify: </p>
-                <p class="label-filler label-field">Fill: ____</p>
-                <p class="label-checker label-field">Check: ____ </p>
-              </div>
-            </section>
-          </div>
-          <div class="lower-half">
-            <footer>
-              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+      </form>
+    </section>
+    <section class="col-8 sticky-top" id="label-preview">
+      <h2 class="text-primary">Label preview</h2>
+      <div id="label-row">
+        <article id="cyclophosphamide-label" class="label cyclophosphamide hidden">
+          <div class="label-body">
+            <div class="upper-half">
+              <header>
+                <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
+                <div class="flex-row">
+                  <p>300 Community Drive <br>
+                    Manhasset, NY 11030</p>
+                  <p>DEA# AN0768917 <br>
+                    (516)562-4700</p>
+                </div>
+              </header>
               <section>
                 <div class="flex-row">
                   <p class="label-patient-name label-field">Patient name</p>
@@ -222,14 +253,16 @@
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding label-field">Cyclophosphamide 500 mG / 25 mL vial</p>
-                  <p class="label-drug-volume compounding label-field">Volume</p>
+                  <p class="label-drug label-field">Cyclophosphamide</p>
+                  <p class="label-drug-volume label-field">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride bag</p>
-                  <p class="label-drug-diluent-volume compounding label-field">Volume</p>
+                  <p class="label-drug-diluent" class="label-field">in 0.9% Sodium Chloride</p>
+                  <p class="label-drug-diluent-volume" class="label-field">Volume</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
+                <p class="label-drug-rate label-field">Rate: </p>
+                <p class="label-drug-frequency label-field">Infuse once, over 1 hour</p>
               </section>
               <section>
                 <div class="flex-row">
@@ -244,61 +277,59 @@
                   <p class="label-checker label-field">Check: ____ </p>
                 </div>
               </section>
-            </footer>
+            </div>
+            <div class="lower-half">
+              <footer>
+                <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-patient-name label-field">Patient name</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-patient-mrn">MRN: </p>
+                    <p class="label-patient-dob label-field">DoB: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-drug compounding label-field">Cyclophosphamide 500 mG / 25 mL vial</p>
+                    <p class="label-drug-volume compounding label-field">Volume</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride bag</p>
+                    <p class="label-drug-diluent-volume compounding label-field">Volume</p>
+                  </div>
+                  <p class="label-total-volume">Total volume: </p>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-expiration-datetime label-field">Exp: </p>
+                    <p class="label-preparation-datetime label-field">Prep: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-verifier label-field">Verify: </p>
+                    <p class="label-filler label-field">Fill: ____</p>
+                    <p class="label-checker label-field">Check: ____ </p>
+                  </div>
+                </section>
+              </footer>
+            </div>
           </div>
-        </div>
-      </article>
-      <article id="mesna-label" class="label mesna hidden">
-        <div class="label-body">
-          <div class="upper-half">
-            <header>
-              <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
-              <div class="flex-row">
-                <p>300 Community Drive <br>
-                  Manhasset, NY 11030</p>
-                <p>DEA# AN0768917 <br>
-                  (516)562-4700</p>
-              </div>
-            </header>
-            <section>
-              <div class="flex-row">
-                <p class="label-patient-name label-field">Patient name</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn">MRN: </p>
-                <p class="label-patient-dob label-field">DoB: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-drug label-field ">Mesna</p>
-                <p class="label-field label-drug-volume">Volume</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
-                <p class="label-drug-diluent-volume label-field">50 mL</p>
-              </div>
-              <p class="label-total-volume">Total volume: </p>
-              <p class="label-drug-rate label-field">Rate: </p>
-              <p class="label-drug-frequency label-field">Infuse once, over 15 minutes</p>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-expiration-datetime label-field">Exp: </p>
-                <p class="label-preparation-datetime label-field">Prep: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-verifier label-field">Verify: </p>
-                <p class="label-filler label-field">Fill: ____</p>
-                <p class="label-checker label-field">Check: ____ </p>
-              </div>
-            </section>
-          </div>
-          <div class="lower-half">
-            <footer>
-              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+        </article>
+        <article id="mesna-label" class="label mesna hidden">
+          <div class="label-body">
+            <div class="upper-half">
+              <header>
+                <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
+                <div class="flex-row">
+                  <p>300 Community Drive <br>
+                    Manhasset, NY 11030</p>
+                  <p>DEA# AN0768917 <br>
+                    (516)562-4700</p>
+                </div>
+              </header>
               <section>
                 <div class="flex-row">
                   <p class="label-patient-name label-field">Patient name</p>
@@ -310,14 +341,16 @@
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding label-field">Mesna 1,000 mG / 10 mL vial</p>
-                  <p class="label-drug-volume compounding label-field">Volume</p>
+                  <p class="label-drug label-field ">Mesna</p>
+                  <p class="label-field label-drug-volume">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
-                  <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
+                  <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
+                  <p class="label-drug-diluent-volume label-field">50 mL</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
+                <p class="label-drug-rate label-field">Rate: </p>
+                <p class="label-drug-frequency label-field">Infuse once, over 15 minutes</p>
               </section>
               <section>
                 <div class="flex-row">
@@ -328,65 +361,63 @@
               <section>
                 <div class="flex-row">
                   <p class="label-verifier label-field">Verify: </p>
-                  <p class="label-filler" class="label-field">Fill: ____</p>
-                  <p class="label-checker label-field">Check: ____</p>
+                  <p class="label-filler label-field">Fill: ____</p>
+                  <p class="label-checker label-field">Check: ____ </p>
                 </div>
               </section>
-            </footer>
+            </div>
+            <div class="lower-half">
+              <footer>
+                <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-patient-name label-field">Patient name</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-patient-mrn">MRN: </p>
+                    <p class="label-patient-dob label-field">DoB: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-drug compounding label-field">Mesna 1,000 mG / 10 mL vial</p>
+                    <p class="label-drug-volume compounding label-field">Volume</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
+                    <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
+                  </div>
+                  <p class="label-total-volume">Total volume: </p>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-expiration-datetime label-field">Exp: </p>
+                    <p class="label-preparation-datetime label-field">Prep: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-verifier label-field">Verify: </p>
+                    <p class="label-filler" class="label-field">Fill: ____</p>
+                    <p class="label-checker label-field">Check: ____</p>
+                  </div>
+                </section>
+              </footer>
+            </div>
           </div>
-        </div>
-      </article>
-      <article id="granisetron-label" class="label granisetron hidden">
-        <div class="label-body">
-          <div class="upper-half">
-            <header>
-              <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
-              <div class="flex-row">
-                <p>300 Community Drive <br>
-                  Manhasset, NY 11030</p>
-                <p>DEA# AN0768917 <br>
-                  (516)562-4700</p>
-              </div>
-            </header>
-            <section>
-              <div class="flex-row">
-                <p class="label-patient-name label-field">Patient name</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-patient-mrn">MRN: </p>
-                <p class="label-patient-dob label-field">DoB: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-drug label-field">Granisetron</p>
-                <p class="label-drug-volume label-field">Volume</p>
-              </div>
-              <div class="flex-row">
-                <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
-                <p class="label-drug-diluent-volume label-field">50 mL</p>
-              </div>
-              <p class="label-total-volume">Total volume: </p>
-              <p class="label-drug-rate" class="label-field">Rate: </p>
-              <p class="label-drug-frequency" class="label-field">Infuse once, over 30 minutes</p>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-expiration-datetime" class="label-field">Exp: </p>
-                <p class="label-preparation-datetime" class="label-field">Prep: </p>
-              </div>
-            </section>
-            <section>
-              <div class="flex-row">
-                <p class="label-verifier" class="label-field">Verify: </p>
-                <p class="label-filler" class="label-field">Fill: ____</p>
-                <p class="label-checker" class="label-field">Check: ____ </p>
-              </div>
-            </section>
-          </div>
-          <div class="lower-half">
-            <footer>
-              <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+        </article>
+        <article id="granisetron-label" class="label granisetron hidden">
+          <div class="label-body">
+            <div class="upper-half">
+              <header>
+                <p class="label-hospital-name">North Shore University Hospital — Pharmacy Department</p>
+                <div class="flex-row">
+                  <p>300 Community Drive <br>
+                    Manhasset, NY 11030</p>
+                  <p>DEA# AN0768917 <br>
+                    (516)562-4700</p>
+                </div>
+              </header>
               <section>
                 <div class="flex-row">
                   <p class="label-patient-name label-field">Patient name</p>
@@ -398,14 +429,16 @@
               </section>
               <section>
                 <div class="flex-row">
-                  <p class="label-drug compounding label-field">Granisetron 1 mG / 1 mL vial</p>
-                  <p class="label-drug-volume compounding label-field">Volume</p>
+                  <p class="label-drug label-field">Granisetron</p>
+                  <p class="label-drug-volume label-field">Volume</p>
                 </div>
                 <div class="flex-row">
-                  <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
-                  <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
+                  <p class="label-drug-diluent label-field">in 0.9% Sodium Chloride</p>
+                  <p class="label-drug-diluent-volume label-field">50 mL</p>
                 </div>
                 <p class="label-total-volume">Total volume: </p>
+                <p class="label-drug-rate" class="label-field">Rate: </p>
+                <p class="label-drug-frequency" class="label-field">Infuse once, over 30 minutes</p>
               </section>
               <section>
                 <div class="flex-row">
@@ -420,16 +453,54 @@
                   <p class="label-checker" class="label-field">Check: ____ </p>
                 </div>
               </section>
-            </footer>
+            </div>
+            <div class="lower-half">
+              <footer>
+                <p class="label-compounding-notice">* * * FOR COMPOUNDING ONLY * * *</p>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-patient-name label-field">Patient name</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-patient-mrn">MRN: </p>
+                    <p class="label-patient-dob label-field">DoB: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-drug compounding label-field">Granisetron 1 mG / 1 mL vial</p>
+                    <p class="label-drug-volume compounding label-field">Volume</p>
+                  </div>
+                  <div class="flex-row">
+                    <p class="label-drug-diluent compounding label-field">0.9% Sodium Chloride 50 mL bag</p>
+                    <p class="label-drug-diluent-volume compounding label-field">50 mL</p>
+                  </div>
+                  <p class="label-total-volume">Total volume: </p>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-expiration-datetime" class="label-field">Exp: </p>
+                    <p class="label-preparation-datetime" class="label-field">Prep: </p>
+                  </div>
+                </section>
+                <section>
+                  <div class="flex-row">
+                    <p class="label-verifier" class="label-field">Verify: </p>
+                    <p class="label-filler" class="label-field">Fill: ____</p>
+                    <p class="label-checker" class="label-field">Check: ____ </p>
+                  </div>
+                </section>
+              </footer>
+            </div>
           </div>
-        </div>
-      </article>
-    </div>
-  </section>
-  <footer>
-    <img id="logo" src="assets/images/nsuh-nwh-logo-inverted.png" alt="North Shore University Hospital Logo">
-    <address><span id="version">Version 0.0.0</span>. Created by Nathaniel J. Liberty, 2018. <br>
-      Email <a href="mailto:nliberty@northwell.edu?subject=Cytoxan%20Label%20Creator">nliberty@northwell.edu</a> with
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="container-fluid text-white bg-dark p-3">
+    <img class="float-left" id="logo" src="assets/images/nsuh-nwh-logo-inverted.png" alt="North Shore University Hospital Logo">
+    <address class="text-right"><span id="version">Version 0.0.0</span>. Created by Nathaniel J. Liberty, 2018.<br>
+      Email <a href="mailto:nliberty@northwell.edu?subject=Cytoxan%20Label%20Creator" class="text-secondary">nliberty@northwell.edu</a> with
       comments, questions, or bug reports.</address>
   </footer>
   <script src="scripts/script.js"></script>
