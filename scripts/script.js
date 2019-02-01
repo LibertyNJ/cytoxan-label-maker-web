@@ -1,8 +1,8 @@
 'use strict';
 
-const VERSION_NUMBER = 'b2';
+const VERSION = '1.0.0';
 const versionElement = document.getElementById('version');
-versionElement.textContent = `Version ${VERSION_NUMBER}`;
+versionElement.textContent = `Version ${VERSION}`;
 
 const formElement = document.getElementsByTagName('form')[0];
 const formControlElements = document.querySelectorAll('.form__control');
