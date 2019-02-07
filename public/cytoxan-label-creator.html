@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <div id="react-root"></div>
   <header class="d-print-none container-fluid p-3 border-bottom mb-3 shadow-sm">
     <a href="help.html" target="_blank" id="help"><button class="btn btn-lg btn-secondary float-right" id="help-button">Help</button></a>
     <h1 class="text-center text-primary">Cytoxan Label Creator</h1>
@@ -59,7 +60,8 @@
           <fieldset class="form-group">
             <legend>Labels needed</legend>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="cyclophosphamide-checkbox" name="cyclophosphamide-checkbox" checked>
+              <input type="checkbox" class="custom-control-input" id="cyclophosphamide-checkbox" name="cyclophosphamide-checkbox"
+                checked>
               <label for="cyclophosphamide-checkbox" class="custom-control-label">
                 Cyclophosphamide
               </label>
@@ -71,7 +73,8 @@
               </label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="granisetron-checkbox" name="granisetron-checkbox" checked>
+              <input type="checkbox" class="custom-control-input" id="granisetron-checkbox" name="granisetron-checkbox"
+                checked>
               <label for="granisetron-checkbox" class="custom-control-label">
                 Granisetron
               </label>
@@ -86,7 +89,7 @@
                   <input type="number" class="form-control" name="cyclophosphamide-strength" id="cyclophosphamide-strength"
                     min="1" placeholder="500" required>
                   <div class="input-group-append">
-                    <div class="input-group-text">mG</div>
+                    <span class="input-group-text">mG</span>
                   </div>
                 </div>
               </div>
@@ -213,7 +216,7 @@
                 <input type="number" class="form-control form-control" id="copies" name="copies" min="1" placeholder="1"
                   required>
                 <div class="input-group-append">
-                  <button class="btn btn-primary btn" type="submit">Print labels</button>
+                  <button class="btn btn-primary" type="submit">Print labels</button>
                 </div>
               </div>
             </div>
@@ -500,6 +503,9 @@
       with comments, questions, or bug reports.
     </address>
   </footer>
+  <script src="scripts/react.development.js"></script>
+  <script src="scripts/react-dom.development.js"></script>
+  <script src="scripts/react-ui.js"></script>
   <script src="scripts/jquery-3.3.1.slim.min.js"></script>
   <script src="scripts/popper.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>

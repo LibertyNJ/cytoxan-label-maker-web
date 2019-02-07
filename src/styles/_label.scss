@@ -1,4 +1,4 @@
-#label-row {
+#label-container {
   display: flex;
   justify-content: space-between;
 }
@@ -33,7 +33,7 @@
     margin: 0;
   }
 
-  >.label-body {
+  &__body {
     height: 5in;
     margin: .0625in;
     overflow: hidden;
@@ -41,12 +41,12 @@
     width: 3in;
   }
 
-  .lower-half {
+  &__lower-half {
     height: 1.9375in;
     margin-top: .0625in;
   }
 
-  .upper-half {
+  &__upper-half {
     height: 3in;
     margin-bottom: .0625in;
   }
@@ -57,21 +57,11 @@
   margin-top: .1in;
   }
 
-  .label-compounding-notice {
+  &__compounding-notice {
     border: 1px solid black;
     font: bold 10pt/1.25 sans-serif;
     letter-spacing: .05em;
     text-align: center;
-  }
-
-  &-drug,
-  &-drug-diluent,
-  &-drug-rate,
-  &-expiration-datetime,
-  &-drug-frequency,
-  &-hospital-name,
-  &-patient-name {
-    font-weight: bold;
   }
 
   &-hospital-name {
@@ -85,30 +75,32 @@
   &-total-volume {
     text-align: right;
   }
+
+  &__row {
+    display: flex;
+    margin: 0;
+    justify-content: space-between;
+  }
 }
 
-.label-row {
-  display: flex;
-  margin: 0;
-  justify-content: space-between;
-}
+
 
 @media screen {
   .label {
     background: gray;
     border: 1px solid black;
 
-    >.label-body {
+    &__body {
       background: pink;
       border: 1px solid black;
       border-radius: .125in;
     }
 
-    .upper-half {
+    &__upper-half {
       border-bottom: 1px dashed gray;
     }
 
-    .lower-half {
+    &__lower-half {
       border-top: 1px dotted gray;
     }
   }
