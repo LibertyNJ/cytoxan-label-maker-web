@@ -1,13 +1,18 @@
 @media print {
-  main,
-  #label-preview,
-  #label-row {
-    display: block;
-    line-height: 0;
+  @page {
+    margin: 0;
+  }
+
+  main {
     margin: 0;
     padding: 0;
   }
 
+  #preview-section {
+    margin: 0;
+    padding: 0;
+  }
+  
   .label {
     page-break-after: always;
   }

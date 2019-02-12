@@ -1,0 +1,58 @@
+.label {
+  height: 5.125in;
+  width: 3.125in;
+  color: black;
+  font: 8pt/1.3 sans-serif;
+
+  header {
+    border-bottom: 1px solid black;
+    font: 7pt/1.15 sans-serif;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__body {
+    height: 5in;
+    margin: .0625in;
+    overflow: hidden;
+    width: 3in;
+  }
+
+  &__compounding-notice {
+    border: 1px solid black;
+    font: 10pt/1.2 sans-serif;
+  }
+
+  &__lower-half {
+    height: 1.9375in;
+    margin-top: .0625in;
+  }
+
+  &__upper-half {
+    height: 3in;
+    margin-bottom: .0625in;
+  }
+}
+
+@media screen {
+  .label {
+    background: gray;
+    border: 1px solid black;
+
+    &__body {
+      background: pink;
+      border: 1px solid black;
+      border-radius: .125in;
+    }
+
+    &__upper-half {
+      margin: .125in .125in 0 .125in;
+    }
+
+    &__lower-half {
+      margin: 0 .125in .125in .125in;
+    }
+  }
+}
