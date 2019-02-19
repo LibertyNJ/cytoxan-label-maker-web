@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Main from './components/main.component';
-import Help from './components/help.component';
+import Main from './screens/Main';
+import Help from './screens/Help';
 
-class App extends Component {
+const version = '1.0.0';
+
+export default class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={Main} />
-        <Route path='/help' component={Help} />
+        <Route
+          exact
+          path="/"
+          render={props => <Main {...props} version={version} />}
+        />
+        <Route
+          path="/help"
+          render={props => <Help {...props} version={version} />}
+        />
       </Switch>
     );
   }
 }
-
-export default App;

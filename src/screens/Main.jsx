@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import FormSection from './form-section.component';
-import PreviewSection from './preview-section.component';
+import Header from '../components/UI/Header';
+import Footer from '../components/UI/Footer/Footer';
+import MainForm from '../components/Main/Form';
+import MainPreview from '../components/Main/Preview';
 
-export default class MainContent extends Component {
+const propTypes = {
+  version: PropTypes.string.isRequired,
+};
+
+class Main extends React.Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +48,6 @@ export default class MainContent extends Component {
     this.initialState = this.state;
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -54,6 +60,10 @@ export default class MainContent extends Component {
       'patientNameFirst',
       'patientNameMi',
     ];
+
+    function capitalize(string) {
+      return string.slice(0, 1).toUpperCase() + string.slice(1);
+    }
 
     if (properNames.includes(name)) {
       this.setState({ [name]: capitalize(value) });
@@ -69,27 +79,18 @@ export default class MainContent extends Component {
 
       this.setState({ [resetName]: resetValue });
     }
-
-    function capitalize(string) {
-      return string.slice(0, 1).toUpperCase() + string.slice(1);
-    }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    window.print();
-  }
-  
   render() {
     const patient = {
       name: {
         last: this.state.patientNameLast,
         first: this.state.patientNameFirst,
-        mi: this.state.patientNameMi
+        mi: this.state.patientNameMi,
       },
 
       mrn: this.state.patientMrn,
-      dob: this.state.patientDob
+      dob: this.state.patientDob,
     };
 
     const medications = {
@@ -105,8 +106,8 @@ export default class MainContent extends Component {
         diluent: {
           name: '0.9% Sodium Chloride',
           product: '0.9% Sodium Chloride bag',
-          volume: (this.state.cyclophosphamideStrength >= 1000) ? 250 : 100
-        }
+          volume: this.state.cyclophosphamideStrength >= 1000 ? 250 : 100,
+        },
       },
 
       mesna: {
@@ -121,8 +122,8 @@ export default class MainContent extends Component {
         diluent: {
           name: '0.9% Sodium Chloride',
           product: '0.9% Sodium Chloride bag',
-          volume: 50
-        }
+          volume: 50,
+        },
       },
 
       granisetron: {
@@ -137,33 +138,38 @@ export default class MainContent extends Component {
         diluent: {
           name: '0.9% Sodium Chloride',
           product: '0.9% Sodium Chloride bag',
-          volume: 50
-        }
+          volume: 50,
+        },
       },
     };
 
     return (
-      <main className="container-fluid row">
-        <FormSection
-          patient={patient}
-          medications={medications}
-          verifier={this.state.verifier}
-          preparation={this.state.preparation}
-          copies={this.state.copies}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+      <div className="vh-100 d-flex flex-column">
+        <Header
+          heading="Cytoxan Label Maker"
+          helpButtonIsEnabled
         />
-        <PreviewSection
-          patient={patient}
-          medications={medications}
-          verifier={this.state.verifier}
-          preparation={this.state.preparation}
-          copies={this.state.copies}
-          isPrinting={this.state.isPrinting}
-        />
-      </main>
+        <main className="container-fluid row mh-0">
+          <MainForm
+            patient={patient}
+            medications={medications}
+            verifier={this.state.verifier}
+            preparation={this.state.preparation}
+            handleChange={this.handleChange}
+          />
+          <MainPreview
+            patient={patient}
+            medications={medications}
+            verifier={this.state.verifier}
+            preparation={this.state.preparation}
+          />
+        </main>
+        <Footer version={this.props.version} />
+      </div>
     );
   }
 }
 
+Main.propTypes = propTypes;
 
+export default Main;
