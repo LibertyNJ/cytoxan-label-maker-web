@@ -144,7 +144,7 @@ class Main extends React.Component {
     };
 
     return (
-      <div className="vh-100 d-flex flex-column">
+      <div className="vh-100 d-flex d-print-block flex-column">
         <Header
           heading="Cytoxan Label Maker"
           helpButtonIsEnabled

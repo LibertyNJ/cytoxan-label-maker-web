@@ -26,13 +26,13 @@
   }
 
   &__lower-half {
-    height: 1.9375in;
-    margin-top: .0625in;
+    height: 1.625in;
+    margin: .25in .25in 0 0;
   }
 
   &__upper-half {
-    height: 3in;
-    margin-bottom: .0625in;
+    height: 2.875in;
+    margin: 0 .25in 0 0;
   }
 }
 
@@ -47,12 +47,12 @@
       border-radius: .125in;
     }
 
-    &__upper-half {
-      margin: .125in .125in 0 .125in;
+    &__lower-half {
+      margin: .25in .125in .125in .125in;
     }
 
-    &__lower-half {
-      margin: 0 .125in .125in .125in;
+    &__upper-half {
+      margin: .125in .125in 0 .125in;
     }
   }
 }

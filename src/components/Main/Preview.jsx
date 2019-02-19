@@ -73,7 +73,7 @@ function Label(props) {
             <VerifyFillCheckSection verifier={props.verifier} />
           </div>
           <div className="label__lower-half">
-            <p className="label__compounding-notice text-center font-weight-bold mt-3">
+            <p className="label__compounding-notice text-center font-weight-bold">
               * * * FOR COMPOUNDING ONLY * * *
             </p>
             <PatientSection {...props.patient} />
