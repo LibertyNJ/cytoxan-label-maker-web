@@ -1,48 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Header from '../components/UI/Header';
-import Footer from '../components/UI/Footer/Footer';
-import MainForm from '../components/Main/Form';
-import MainPreview from '../components/Main/Preview';
-
-const propTypes = {
-  version: PropTypes.string.isRequired,
-};
+import FormSection from '../components/Form';
+import PreviewSection from '../components/Preview';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      patientNameLast: '',
-      patientNameFirst: '',
-      patientNameMi: '',
-      patientMrn: '',
-      patientDob: '',
-
       cyclophosphamideIsEnabled: true,
-      cyclophosphamideStrength: '',
       cyclophosphamideInfusionTime: '60',
       cyclophosphamideInfusionTimeIsOverridden: false,
-      cyclophosphamideSpecialInstructions: '',
-
       mesnaIsEnabled: true,
-      mesnaStrength: '',
       mesnaInfusionTime: '15',
       mesnaInfusionTimeIsOverridden: false,
-      mesnaSpecialInstructions: '',
-
       granisetronIsEnabled: true,
-      granisetronStrength: '',
       granisetronInfusionTime: '30',
       granisetronInfusionTimeIsOverridden: false,
-      granisetronSpecialInstructions: '',
-
-      verifier: '',
-      preparation: '',
-
-      copies: '',
     };
 
     this.initialState = this.state;
@@ -101,7 +75,8 @@ class Main extends React.Component {
         concentration: 20,
         strength: this.state.cyclophosphamideStrength,
         infusionTime: this.state.cyclophosphamideInfusionTime,
-        infusionTimeIsOverridden: this.state.cyclophosphamideInfusionTimeIsOverridden,
+        infusionTimeIsOverridden: this.state
+          .cyclophosphamideInfusionTimeIsOverridden,
         specialInstructions: this.state.cyclophosphamideSpecialInstructions,
         diluent: {
           name: '0.9% Sodium Chloride',
@@ -133,7 +108,8 @@ class Main extends React.Component {
         concentration: 1,
         strength: this.state.granisetronStrength,
         infusionTime: this.state.granisetronInfusionTime,
-        infusionTimeIsOverridden: this.state.granisetronInfusionTimeIsOverridden,
+        infusionTimeIsOverridden: this.state
+          .granisetronInfusionTimeIsOverridden,
         specialInstructions: this.state.granisetronSpecialInstructions,
         diluent: {
           name: '0.9% Sodium Chloride',
@@ -144,32 +120,23 @@ class Main extends React.Component {
     };
 
     return (
-      <div className="vh-100 d-flex d-print-block flex-column">
-        <Header
-          heading="Cytoxan Label Maker"
-          helpButtonIsEnabled
+      <div className="row flex-grow-1">
+        <FormSection
+          patient={patient}
+          medications={medications}
+          verifier={this.state.verifier}
+          preparation={this.state.preparation}
+          handleChange={this.handleChange}
         />
-        <main className="container-fluid row mh-0">
-          <MainForm
-            patient={patient}
-            medications={medications}
-            verifier={this.state.verifier}
-            preparation={this.state.preparation}
-            handleChange={this.handleChange}
-          />
-          <MainPreview
-            patient={patient}
-            medications={medications}
-            verifier={this.state.verifier}
-            preparation={this.state.preparation}
-          />
-        </main>
-        <Footer version={this.props.version} />
+        <PreviewSection
+          patient={patient}
+          medications={medications}
+          verifier={this.state.verifier}
+          preparation={this.state.preparation}
+        />
       </div>
     );
   }
 }
-
-Main.propTypes = propTypes;
 
 export default Main;

@@ -1,25 +1,21 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Main from './screens/Main';
-import Help from './screens/Help';
+import Layout from './components/Layout';
+import Main from './views/Main';
+import Help from './views/Help';
 
-const version = '1.0.0';
+import { version } from '../package.json';
 
 export default class App extends React.Component {
   render() {
     return (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={props => <Main {...props} version={version} />}
-        />
-        <Route
-          path="/help"
-          render={props => <Help {...props} version={version} />}
-        />
-      </Switch>
+      <Layout version={version}>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/help" component={Help} />
+        </Switch>
+      </Layout>
     );
   }
 }

@@ -1,15 +1,16 @@
 {
   "name": "cytoxan-label-maker",
   "productName": "Cytoxan Label Maker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Label maker for Cytoxan and related infusions at North Shore University Hospital.",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "package": "electron-forge package",
+    "package": "electron-forge package --arch=ia32",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --cache --color --ext .jsx,.js src"
+    "lint": "eslint --cache --color --ext .jsx,.js src",
+    "node-sass": "start node-sass --watch --output-style=compressed ./src/styles/scss/style.scss ./src/styles/style.css"
   },
   "keywords": [],
   "author": "Nathaniel J. Liberty",
@@ -30,10 +31,11 @@
       },
       "electronPackagerConfig": {
         "packageManager": "npm",
-        "appCopyright": "© 2019 Nathaniel J. Liberty",
+        "appCopyright": ".",
         "asar": true,
         "executableName": "cytoxan-label-maker",
         "name": "Cytoxan Label Maker",
+        "icon": "src/assets/images/icon.ico",
         "win32metadata": {
           "CompanyName": "Northwell Health",
           "FileDescription": "Label maker for Cytoxan and related infusions at North Shore University Hospital"
@@ -59,10 +61,13 @@
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "react-hot-loader": "^3.1.3",
-    "react-router-dom": "^4.3.1"
+    "jquery": "^3.4.0",
+    "popper.js": "^1.14.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.8.4",
+    "react-router-dom": "^5.0.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
@@ -75,6 +80,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.12.4",
+    "node-sass": "^4.12.0"
   }
 }

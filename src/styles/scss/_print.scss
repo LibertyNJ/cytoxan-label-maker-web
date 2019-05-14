@@ -8,12 +8,16 @@
     padding: 0;
   }
 
+  .label {
+    page-break-after: always;
+  }
+
+  #labels {
+    overflow: visible !important;
+  }
+
   #preview-section {
     margin: 0;
     padding: 0;
-  }
-  
-  .label {
-    page-break-after: always;
   }
 }

@@ -1,35 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MainPreview(props) {
-  return (
-    <section id="preview-section" className="col-8">
-      <h2 className="d-print-none text-primary">Preview</h2>
-      <div className="d-flex d-print-block justify-content-between">
-        <Label
-          patient={props.patient}
-          medication={props.medications.cyclophosphamide}
-          preparation={props.preparation}
-          verifier={props.verifier}
-        />
-        <Label
-          patient={props.patient}
-          medication={props.medications.mesna}
-          preparation={props.preparation}
-          verifier={props.verifier}
-        />
-        <Label
-          patient={props.patient}
-          medication={props.medications.granisetron}
-          preparation={props.preparation}
-          verifier={props.verifier}
-        />
-      </div>
-    </section>
-  );
-}
+const Preview = props => (
+  <section id="preview-section" className="col-8 d-flex flex-column">
+    <header className="d-print-none">
+      <h2 className="text-primary">Preview</h2>
+    </header>
+    <div
+      id="labels"
+      className="d-flex d-print-block justify-content-between flex-grow-1 overflow-auto"
+    >
+      <Label
+        patient={props.patient}
+        medication={props.medications.cyclophosphamide}
+        preparation={props.preparation}
+        verifier={props.verifier}
+      />
+      <Label
+        patient={props.patient}
+        medication={props.medications.mesna}
+        preparation={props.preparation}
+        verifier={props.verifier}
+      />
+      <Label
+        patient={props.patient}
+        medication={props.medications.granisetron}
+        preparation={props.preparation}
+        verifier={props.verifier}
+      />
+    </div>
+  </section>
+);
 
-MainPreview.propTypes = {
+Preview.propTypes = {
   patient: PropTypes.shape({
     name: PropTypes.object,
     mrn: PropTypes.string,
@@ -42,11 +45,16 @@ MainPreview.propTypes = {
     granisetron: PropTypes.object,
   }).isRequired,
 
-  preparation: PropTypes.string.isRequired,
-  verifier: PropTypes.string.isRequired,
+  preparation: PropTypes.string,
+  verifier: PropTypes.string,
 };
 
-function Label(props) {
+Preview.defaultProps = {
+  preparation: '',
+  verifier: '',
+};
+
+const Label = props => {
   if (props.medication.isEnabled) {
     return (
       <article className="label">
@@ -58,11 +66,13 @@ function Label(props) {
               </p>
               <div className="d-flex justify-content-between m-0">
                 <p>
-                  300 Community Drive<br />
+                  300 Community Drive
+                  <br />
                   Manhasset, NY 11030
                 </p>
                 <p>
-                  DEA# AN0768917<br />
+                  DEA# AN0768917
+                  <br />
                   (516)562-4700
                 </p>
               </div>
@@ -85,10 +95,9 @@ function Label(props) {
       </article>
     );
   }
-  return (
-    null
-  );
-}
+
+  return null;
+};
 
 Label.propTypes = {
   medication: PropTypes.shape({
@@ -99,11 +108,16 @@ Label.propTypes = {
     mrn: PropTypes.string,
     dob: PropTypes.string,
   }).isRequired,
-  preparation: PropTypes.string.isRequired,
-  verifier: PropTypes.string.isRequired,
+  preparation: PropTypes.string,
+  verifier: PropTypes.string,
 };
 
-function PatientSection(props) {
+Label.defaultProps = {
+  preparation: '',
+  verifier: '',
+};
+
+const PatientSection = props => {
   const name = {
     last: props.name.last ? props.name.last : 'Last name',
     first: props.name.first ? props.name.first : 'First name',
@@ -112,18 +126,20 @@ function PatientSection(props) {
 
   const mrn = props.mrn ? props.mrn : '########';
 
-  const dateFormat = {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric',
-  };
-
-  const dob = props.dob ? new Date(`${props.dob}T00:00:00`).toLocaleString('en-US', dateFormat) : 'MM/DD/YYYY';
+  const dob = props.dob
+    ? new Date(`${props.dob}T00:00:00`).toLocaleString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      })
+    : 'MM/DD/YYYY';
 
   return (
     <section className="my-1">
       <div className="d-flex justify-content-between m-0">
-        <p className="font-weight-bold">{name.last}, {name.first} {name.mi}</p>
+        <p className="font-weight-bold">
+          {name.last}, {name.first} {name.mi}
+        </p>
       </div>
       <div className="d-flex justify-content-between m-0">
         <p>MRN: {mrn}</p>
@@ -131,7 +147,7 @@ function PatientSection(props) {
       </div>
     </section>
   );
-}
+};
 
 PatientSection.propTypes = {
   name: PropTypes.shape({
@@ -139,26 +155,38 @@ PatientSection.propTypes = {
     first: PropTypes.string,
     mi: PropTypes.string,
   }).isRequired,
-  mrn: PropTypes.string.isRequired,
-  dob: PropTypes.string.isRequired,
+  mrn: PropTypes.string,
+  dob: PropTypes.string,
 };
 
-function MedicationSection(props) {
+PatientSection.defaultProps = {
+  mrn: '',
+  dob: '',
+};
+
+const MedicationSection = props => {
   const medication = {
     name: props.name ? props.name : 'Medication',
     strength: props.strength ? props.strength : 0,
-    volume: props.strength && props.concentration ?
-      props.strength / props.concentration : 0,
+    volume:
+      props.strength && props.concentration
+        ? props.strength / props.concentration
+        : 0,
   };
 
   const diluent = {
     name: props.diluent.name ? props.diluent.name : 'Diluent',
     volume: props.diluent.volume ? props.diluent.volume : '#',
   };
+
+  const totalVolume =
+    typeof (medication.volume + diluent.volume) === 'number'
+      ? medication.volume + diluent.volume
+      : 0;
+
   let infusionTime = props.infusionTime;
-  const totalVolume = typeof (medication.volume + diluent.volume) === 'number' ? medication.volume + diluent.volume : 0;
-  const rate = (totalVolume / infusionTime) * 60;
   let infusionTimeUnits = 'minute(s)';
+  const rate = (totalVolume / infusionTime) * 60; // Rate is always mL / hr, but infusion time may be expressed in hours if simpler.
 
   if (props.infusionTime % 60 === 0) {
     infusionTime /= 60;
@@ -175,40 +203,51 @@ function MedicationSection(props) {
   return (
     <section className="my-1">
       <div className="d-flex justify-content-between m-0">
-        <p className="font-weight-bold">{medication.name} {Number(medication.strength).toLocaleString('en-US', numberFormat)} mG</p>
-        <p>{Number(medication.volume).toLocaleString('en-US', numberFormat)} mL</p>
+        <p className="font-weight-bold">
+          {medication.name}{' '}
+          {(+medication.strength).toLocaleString('en-US', numberFormat)} mG
+        </p>
+        <p>{(+medication.volume).toLocaleString('en-US', numberFormat)} mL</p>
       </div>
       <div className="d-flex justify-content-between m-0">
         <p className="font-weight-bold">in {diluent.name}</p>
-        <p>{Number(diluent.volume).toLocaleString('en-US', numberFormat)} mL</p>
+        <p>{(+diluent.volume).toLocaleString('en-US', numberFormat)} mL</p>
       </div>
-      <p className="text-right">Total volume: {Number(totalVolume).toLocaleString('en-US', numberFormat)} mL</p>
+      <p className="text-right">
+        Total volume: {(+totalVolume).toLocaleString('en-US', numberFormat)} mL
+      </p>
       <div className="d-flex justify-content-between m-0">
-        <p className="font-weight-bold">Rate: {Number(rate).toLocaleString('en-US', numberFormat)} mL / hr</p>
-        <p className="font-weight-bold">Infuse over {Number(infusionTime).toLocaleString('en-US', numberFormat)} {infusionTimeUnits}</p>
+        <p className="font-weight-bold">
+          Rate: {(+rate).toLocaleString('en-US', numberFormat)} mL / hr
+        </p>
+        <p className="font-weight-bold">
+          Infuse over {(+infusionTime).toLocaleString('en-US', numberFormat)}{' '}
+          {infusionTimeUnits}
+        </p>
       </div>
       <p className="font-italic">{specialInstructions}</p>
     </section>
   );
-}
+};
 
 MedicationSection.propTypes = {
   name: PropTypes.string.isRequired,
-  strength: PropTypes.string.isRequired,
+  strength: PropTypes.string,
   concentration: PropTypes.number.isRequired,
   diluent: PropTypes.shape({
     name: PropTypes.string,
     volume: PropTypes.number,
   }).isRequired,
   infusionTime: PropTypes.string.isRequired,
-  specialInstructions: PropTypes.string.isRequired,
+  specialInstructions: PropTypes.string,
 };
 
-function ExpPrepSection(props) {
-  function getTomorrow(date) {
-    return new Date(date.setDate(date.getDate() + 1));
-  }
+MedicationSection.defaultProps = {
+  strength: '',
+  specialInstructions: '',
+};
 
+const ExpPrepSection = props => {
   const dateFormat = {
     month: '2-digit',
     day: '2-digit',
@@ -218,8 +257,18 @@ function ExpPrepSection(props) {
     hour12: false,
   };
 
-  const preparation = props.preparation ? new Date(props.preparation).toLocaleString('en-US', dateFormat) : 'MM/DD/YYYY hh:mm';
-  const expiration = props.preparation ? getTomorrow(new Date(props.preparation)).toLocaleString('en-US', dateFormat) : 'MM/DD/YYYY hh:mm';
+  const preparation = props.preparation
+    ? new Date(props.preparation).toLocaleString('en-US', dateFormat)
+    : 'MM/DD/YYYY hh:mm';
+
+  const getTomorrow = date => new Date(date.setDate(date.getDate() + 1));
+
+  const expiration = props.preparation
+    ? getTomorrow(new Date(props.preparation)).toLocaleString(
+        'en-US',
+        dateFormat
+      )
+    : 'MM/DD/YYYY hh:mm';
 
   return (
     <section className="my-1">
@@ -229,13 +278,17 @@ function ExpPrepSection(props) {
       </div>
     </section>
   );
-}
-
-ExpPrepSection.propTypes = {
-  preparation: PropTypes.string.isRequired,
 };
 
-function VerifyFillCheckSection(props) {
+ExpPrepSection.propTypes = {
+  preparation: PropTypes.string,
+};
+
+ExpPrepSection.defaultProps = {
+  preparation: '',
+};
+
+const VerifyFillCheckSection = props => {
   const verifier = props.verifier ? props.verifier : '____';
 
   return (
@@ -247,19 +300,25 @@ function VerifyFillCheckSection(props) {
       </div>
     </section>
   );
-}
-
-VerifyFillCheckSection.propTypes = {
-  verifier: PropTypes.string.isRequired,
 };
 
-function CompoundingSection(props) {
+VerifyFillCheckSection.propTypes = {
+  verifier: PropTypes.string,
+};
+
+VerifyFillCheckSection.defaultProps = {
+  verifier: '',
+};
+
+const CompoundingSection = props => {
   const medication = {
     product: props.product ? props.product : 'Medication product',
     strength: props.strength,
     concentration: props.concentration,
-    volume: props.strength && props.concentration ?
-      props.strength / props.concentration : 0,
+    volume:
+      props.strength && props.concentration
+        ? props.strength / props.concentration
+        : 0,
   };
 
   const diluent = {
@@ -267,7 +326,10 @@ function CompoundingSection(props) {
     volume: props.diluent.volume ? props.diluent.volume : '#',
   };
 
-  const totalVolume = typeof (medication.volume + diluent.volume) === 'number' ? medication.volume + diluent.volume : 0;
+  const totalVolume =
+    typeof (medication.volume + diluent.volume) === 'number'
+      ? medication.volume + diluent.volume
+      : 0;
 
   const numberFormat = {
     useGrouping: true,
@@ -278,20 +340,22 @@ function CompoundingSection(props) {
     <section className="my-1">
       <div className="d-flex justify-content-between m-0">
         <p>{medication.product}</p>
-        <p>{Number(medication.volume).toLocaleString('en-US', numberFormat)} mL</p>
+        <p>{(+medication.volume).toLocaleString('en-US', numberFormat)} mL</p>
       </div>
       <div className="d-flex justify-content-between m-0">
         <p>{diluent.product}</p>
-        <p>{Number(diluent.volume).toLocaleString('en-US', numberFormat)} mL</p>
+        <p>{(+diluent.volume).toLocaleString('en-US', numberFormat)} mL</p>
       </div>
-      <p className="text-right">Total volume: {Number(totalVolume).toLocaleString('en-US', numberFormat)} mL</p>
+      <p className="text-right">
+        Total volume: {(+totalVolume).toLocaleString('en-US', numberFormat)} mL
+      </p>
     </section>
   );
-}
+};
 
 CompoundingSection.propTypes = {
   product: PropTypes.string.isRequired,
-  strength: PropTypes.string.isRequired,
+  strength: PropTypes.string,
   concentration: PropTypes.number.isRequired,
   diluent: PropTypes.shape({
     product: PropTypes.string,
@@ -299,4 +363,8 @@ CompoundingSection.propTypes = {
   }).isRequired,
 };
 
-export default MainPreview;
+CompoundingSection.defaultProps = {
+  strength: '',
+};
+
+export default Preview;

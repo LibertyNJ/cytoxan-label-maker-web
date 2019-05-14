@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MainForm extends React.Component {
+import Button from './Button';
+import SVGIcon from './SVGIcon';
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     window.print();
@@ -9,9 +18,14 @@ class MainForm extends React.Component {
 
   render() {
     return (
-      <section className="d-print-none overflow-auto col-4">
-        <h2 className="text-primary">Form</h2>
-        <form onSubmit={this.handleSubmit}>
+      <section className="col-4 d-flex flex-column d-print-none">
+        <header>
+          <h2 className="text-primary">Form</h2>
+        </header>
+        <form
+          className="form overflow-auto px-3 pb-3 ml-n3"
+          onSubmit={this.handleSubmit}
+        >
           <Section header="Patient">
             <fieldset className="form-group">
               <legend>Name</legend>
@@ -56,8 +70,8 @@ class MainForm extends React.Component {
                     handleChange={this.props.handleChange}
                   />
                 </div>
-              </div >
-            </fieldset >
+              </div>
+            </fieldset>
             <div className="form-row">
               <div className="form-group col">
                 <Input
@@ -173,14 +187,20 @@ class MainForm extends React.Component {
               </div>
             </div>
           </Section>
-          <button className="btn btn-primary btn-lg d-block ml-auto" type="submit">Print</button>
+          <Button
+            type="submit"
+            text="Print"
+            icon="print"
+            color="primary"
+            className="btn-lg d-block ml-auto"
+          />
         </form>
       </section>
     );
   }
 }
 
-MainForm.propTypes = {
+Form.propTypes = {
   patient: PropTypes.shape({
     name: PropTypes.object,
     mrn: PropTypes.string,
@@ -191,19 +211,24 @@ MainForm.propTypes = {
     mesna: PropTypes.object,
     granisetron: PropTypes.object,
   }).isRequired,
-  verifier: PropTypes.string.isRequired,
-  preparation: PropTypes.string.isRequired,
+  verifier: PropTypes.string,
+  preparation: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
 };
 
-function Section(props) {
+Form.defaultProps = {
+  verifier: '',
+  preparation: '',
+};
+
+const Section = props => {
   return (
     <section className="p-3 border mb-3">
       <h3 className="text-primary">{props.header}</h3>
       {props.children}
     </section>
   );
-}
+};
 
 Section.propTypes = {
   children: PropTypes.node.isRequired,
@@ -214,7 +239,7 @@ Section.defaultProps = {
   children: null,
 };
 
-function MedicationSubsection(props) {
+const MedicationSubsection = props => {
   if (props.isEnabled) {
     return (
       <section className="p-3 border mb-3">
@@ -279,15 +304,13 @@ function MedicationSubsection(props) {
       </section>
     );
   }
-  return (
-    null
-  );
-}
+  return null;
+};
 
 MedicationSubsection.propTypes = {
   isEnabled: PropTypes.bool.isRequired,
   medication: PropTypes.string.isRequired,
-  strength: PropTypes.string.isRequired,
+  strength: PropTypes.string,
   placeholders: PropTypes.shape({
     strength: PropTypes.string,
     infusionTime: PropTypes.string,
@@ -295,29 +318,29 @@ MedicationSubsection.propTypes = {
   handleChange: PropTypes.func.isRequired,
   infusionTime: PropTypes.string.isRequired,
   infusionTimeIsOverridden: PropTypes.bool.isRequired,
-  specialInstructions: PropTypes.string.isRequired,
+  specialInstructions: PropTypes.string,
 };
 
-function Toggle(props) {
-  return (
-    <div className={`custom-control custom-${props.type}`}>
-      <input
-        id={props.name}
-        className="custom-control-input"
-        type="checkbox"
-        name={props.name}
-        checked={props.checked}
-        onChange={props.handleChange}
-      />
-      <label
-        className="custom-control-label"
-        htmlFor={props.name}
-      >
-        {props.label}
-      </label>
-    </div>
-  );
-}
+MedicationSubsection.defaultProps = {
+  strength: '',
+  specialInstructions: '',
+};
+
+const Toggle = props => (
+  <div className={`custom-control custom-${props.type}`}>
+    <input
+      id={props.name}
+      className="custom-control-input"
+      type="checkbox"
+      name={props.name}
+      checked={props.checked}
+      onChange={props.handleChange}
+    />
+    <label className="custom-control-label" htmlFor={props.name}>
+      {props.label}
+    </label>
+  </div>
+);
 
 Toggle.propTypes = {
   type: PropTypes.string.isRequired,
@@ -327,7 +350,7 @@ Toggle.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-function Input(props) {
+const Input = props => {
   const InputElement = props.type === 'textarea' ? 'textarea' : 'input';
 
   if (props.append) {
@@ -335,9 +358,7 @@ function Input(props) {
 
     return (
       <div>
-        <label htmlFor={props.name}>
-          {props.label}
-        </label>
+        <label htmlFor={props.name}>{props.label}</label>
         <div className="input-group">
           <InputElement
             id={props.name}
@@ -350,19 +371,30 @@ function Input(props) {
             {...props.attributes}
           />
           <div className="input-group-append">
-            <AppendElement {...props.append.props}>{props.append.children}</AppendElement>
+            <AppendElement {...props.append.props}>
+              {props.append.children}
+            </AppendElement>
           </div>
         </div>
-        {props.info ? <small className="form-text text-info">{props.info}</small> : null}
+        {props.info ? (
+          <small className="form-text text-info">
+            <SVGIcon
+              className="align-baseline"
+              type="info-circle"
+              width="1em"
+              height="1em"
+              fill="#17b2a8"
+            />{' '}
+            {props.info}
+          </small>
+        ) : null}
       </div>
     );
   }
 
   return (
     <div>
-      <label htmlFor={props.name}>
-        {props.label}
-      </label>
+      <label htmlFor={props.name}>{props.label}</label>
       <InputElement
         id={props.name}
         className="form-control"
@@ -373,15 +405,26 @@ function Input(props) {
         onChange={props.handleChange}
         {...props.attributes}
       />
-      {props.info ? <small className="form-text text-info">{props.info}</small> : null}
+      {props.info && (
+        <small className="form-text text-info">
+          <SVGIcon
+            className="align-baseline"
+            type="info-circle"
+            width="1em"
+            height="1em"
+            fill="#17b2a8"
+          />{' '}
+          {props.info}
+        </small>
+      )}
     </div>
   );
-}
+};
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   label: PropTypes.string.isRequired,
   info: PropTypes.string,
   disabled: PropTypes.bool,
@@ -395,10 +438,11 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  value: '',
   info: undefined,
-  disabled: undefined,
+  disabled: false,
   append: undefined,
   attributes: undefined,
 };
 
-export default MainForm;
+export default Form;
