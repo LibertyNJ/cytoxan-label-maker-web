@@ -120,7 +120,7 @@ class Main extends React.Component {
     };
 
     return (
-      <div className="row flex-grow-1">
+      <div className="row">
         <FormSection
           patient={patient}
           medications={medications}

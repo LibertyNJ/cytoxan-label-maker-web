@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Preview = props => (
-  <section id="preview-section" className="col-8 d-flex flex-column">
+  <section id="preview-section" className="col-8 d-flex flex-column d-print-block">
     <header className="d-print-none">
       <h2 className="text-primary">Preview</h2>
     </header>

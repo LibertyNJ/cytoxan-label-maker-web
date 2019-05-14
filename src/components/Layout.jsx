@@ -23,7 +23,7 @@ const Layout = props => {
           </ul>
         </nav>
       </header>
-      <main className="container-fluid d-flex flex-column flex-grow-1">
+      <main className="container-fluid d-flex flex-column d-print-block">
         {props.children}
       </main>
       <footer className="container-fluid flex-shrink-0 d-flex d-print-none justify-content-between text-light bg-dark px-3 py-1">
