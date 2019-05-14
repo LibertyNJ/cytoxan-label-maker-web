@@ -120,7 +120,7 @@ class Main extends React.Component {
     };
 
     return (
-      <div className="row">
+      <div className="row flex-nowrap">
         <FormSection
           patient={patient}
           medications={medications}
