@@ -1,37 +1,37 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import SVGIcon from './SVGIcon';
 
-const Button = props => {
-  const className = `btn btn-${props.color} ${props.className}`;
-  return (
-    <button className={className} type={props.type}>
-      {props.icon && (
-        <React.Fragment>
-          <SVGIcon
-            className="align-baseline"
-            type={props.icon}
-            width="1em"
-            height="1em"
-            fill="white"
-          />{' '}
-        </React.Fragment>
-      )}
-      {props.text}
-    </button>
-  );
-};
+const Button = props => (
+  <button className={`btn btn-${props.bootstrapColor} ${props.className}`} type={props.type}>
+    {props.iconType && (
+      <React.Fragment>
+        <SVGIcon
+          className="align-baseline"
+          type={props.iconType}
+          width="1em"
+          height="1em"
+          fill="white"
+        />{' '}
+      </React.Fragment>
+    )}
+    {props.text}
+  </button>
+);
 
 Button.propTypes = {
-  type: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  bootstrapColor: PropTypes.string,
   className: PropTypes.string,
+  iconType: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 Button.defaultProps = {
+  bootstrapColor: 'primary',
   className: '',
+  iconType: undefined,
 };
 
 export default Button;
