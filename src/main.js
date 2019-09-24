@@ -1,52 +1,70 @@
-import { app, BrowserWindow } from 'electron';
-import installExtension, {
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
-import { enableLiveReload } from 'electron-compile';
+'use-strict';
 
-let mainWindow;
+import { app, BrowserWindow } from 'electron';
+import { enableLiveReload } from 'electron-compile';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
+let mainWindow;
+
 if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 
-const createWindow = async () => {
+app.on('activate', handleActivate);
+app.on('ready', handleReady);
+app.on('window-all-closed', handleWindowAllClosed);
+
+function handleActivate() {
+  if (isMainWindowClosed()) {
+    createWindow();
+  }
+}
+
+function isMainWindowClosed() {
+  return mainWindow === null;
+}
+
+function handleReady() {
+  createWindow();
+}
+
+async function createWindow() {
   mainWindow = new BrowserWindow({
+    minHeight: 675,
+    minWidth: 900,
     show: false,
-    minWidth: 800,
-    minHeight: 600,
     webPreferences: {
       nodeIntegration: true,
     },
   });
-
   mainWindow.loadURL(`file://${__dirname}/index.html`);
-
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.maximize();
-    mainWindow.show();
-  });
-
+  mainWindow.once('ready-to-show', handleReadyToShow);
   if (isDevMode) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
-    mainWindow.webContents.openDevTools();
+    await installAndOpenDevTools();
   }
+  mainWindow.on('closed', handleClosed);
+}
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-};
+function handleReadyToShow() {
+  mainWindow.maximize();
+  mainWindow.show();
+}
 
-app.on('ready', createWindow);
+async function installAndOpenDevTools() {
+  await installExtension(REACT_DEVELOPER_TOOLS);
+  mainWindow.webContents.openDevTools();
+}
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+function handleClosed() {
+  mainWindow = null;
+}
+
+function handleWindowAllClosed() {
+  if (!isPlatformDarwin()) {
     app.quit();
   }
-});
+}
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+function isPlatformDarwin() {
+  return process.platform === 'darwin';
+}

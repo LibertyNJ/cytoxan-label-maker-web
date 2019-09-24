@@ -38,8 +38,8 @@
         "name": "Cytoxan Label Maker",
         "icon": "src/assets/images/icon.ico",
         "win32metadata": {
-          "CompanyName": "Northwell Health",
-          "FileDescription": "Label maker for Cytoxan and related infusions at North Shore University Hospital"
+          "CompanyName": ".",
+          "FileDescription": "Label maker for Cytoxan and related infusions."
         }
       },
       "electronWinstallerConfig": {
@@ -58,6 +58,11 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.24",
+    "@fortawesome/free-brands-svg-icons": "^5.11.1",
+    "@fortawesome/free-regular-svg-icons": "^5.11.1",
+    "@fortawesome/free-solid-svg-icons": "^5.11.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
@@ -68,10 +73,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.4",
-    "react-router-dom": "^5.0.0"
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.0",
@@ -80,6 +88,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",

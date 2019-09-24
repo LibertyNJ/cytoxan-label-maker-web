@@ -15,7 +15,7 @@
 
   &__body {
     height: 5in;
-    margin: .0625in;
+    margin: 0.0625in;
     overflow: hidden;
     width: 3in;
   }
@@ -27,12 +27,12 @@
 
   &__lower-half {
     height: 1.625in;
-    margin: .25in .25in 0 0;
+    margin: 0.25in 0.25in 0 0;
   }
 
   &__upper-half {
     height: 2.875in;
-    margin: 0 .25in 0 0;
+    margin: 0 0.25in 0 0;
   }
 }
 
@@ -40,20 +40,20 @@
   .label {
     background: gray;
     border: 1px solid black;
-    margin: 16px;
+    margin: 16px 0;
 
     &__body {
       background: pink;
       border: 1px solid black;
-      border-radius: .125in;
+      border-radius: 0.125in;
     }
 
     &__lower-half {
-      margin: .25in .125in .125in .125in;
+      margin: 0.25in 0.125in 0.125in 0.125in;
     }
 
     &__upper-half {
-      margin: .125in .125in 0 .125in;
+      margin: 0.125in 0.125in 0 0.125in;
     }
   }
 }

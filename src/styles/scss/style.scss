@@ -2,13 +2,6 @@
   outline: none;
 }
 
-@media screen {
-  p,
-  li {
-    max-width: 30em;
-  }
-}
-
 @import 'label';
 @import 'print';
 @import 'config';

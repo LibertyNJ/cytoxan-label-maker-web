@@ -1,0 +1,6 @@
+'use-strict';
+
+export const CHANGE_FIELD = 'CHANGE_FIELD';
+export const SET_DATE = 'SET_DATE';
+export const TOGGLE_INFUSION_TIME_OVERRIDE = 'TOGGLE_INFUSION_TIME_OVERRIDE';
+export const TOGGLE_MEDICATION = 'TOGGLE_MEDICATION';
