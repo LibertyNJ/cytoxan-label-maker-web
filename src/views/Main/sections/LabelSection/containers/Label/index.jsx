@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import LowerHalf from './LowerHalf';
 import UpperHalf from './UpperHalf';
-import { reduceClassName } from '../../../../../../util';
+import { reduceClassNames } from '../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -42,7 +42,7 @@ function Label({
   className, isEnabled, medication, ...restProps
 }) {
   return isEnabled ? (
-    <article className={reduceClassName('label', className)} {...restProps}>
+    <article className={reduceClassNames('label', className)} {...restProps}>
       <div className="label__body">
         <UpperHalf medication={medication} />
         <LowerHalf medication={medication} />

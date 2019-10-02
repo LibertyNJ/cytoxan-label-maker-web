@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import LabelRow from '../components/LabelRow';
 import LabelSection from '../components/LabelSection';
-import { formatNumberAsString } from '../../../../../../../util';
+import { convertNumberToFormattedString } from '../../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -47,14 +47,14 @@ function CompoundingSection({
     <LabelSection {...restProps}>
       <LabelRow>
         <p>{product}</p>
-        <p>{formatNumberAsString(medicationVolume)} mL</p>
+        <p>{convertNumberToFormattedString(medicationVolume)} mL</p>
       </LabelRow>
       <LabelRow>
         <p>{diluent.product}</p>
         <p>{diluentVolume} mL</p>
       </LabelRow>
       <LabelRow>
-        <p className="ml-auto">Total volume: {formatNumberAsString(totalVolume)} mL</p>
+        <p className="ml-auto">Total volume: {convertNumberToFormattedString(totalVolume)} mL</p>
       </LabelRow>
     </LabelSection>
   );

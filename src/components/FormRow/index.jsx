@@ -3,16 +3,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { reduceClassName } from '../../util';
+import { reduceClassNames } from '../../util';
 
 FormRow.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
 
+export const BASE_CLASS_NAME = 'form-row';
+
 export default function FormRow({ children, className, ...restProps }) {
   return (
-    <div className={reduceClassName('form-row', className)} {...restProps}>
+    <div className={reduceClassNames(BASE_CLASS_NAME, className)} {...restProps}>
       {children}
     </div>
   );

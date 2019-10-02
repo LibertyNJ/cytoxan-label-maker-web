@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import LabelRow from '../components/LabelRow';
 import LabelSection from '../components/LabelSection';
-import { formatNumberAsString } from '../../../../../../../util';
+import { convertNumberToFormattedString } from '../../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -58,21 +58,26 @@ function MedicationSection({
     <LabelSection {...restProps}>
       <LabelRow>
         <p className="font-weight-bold">
-          <span className="text-capitalize">{name}</span> {formatNumberAsString(strength)} mG
+          <span className="text-capitalize">{name}</span> {convertNumberToFormattedString(strength)}{' '}
+          mG
         </p>
-        <p>{formatNumberAsString(medicationVolume)} mL</p>
+        <p>{convertNumberToFormattedString(medicationVolume)} mL</p>
       </LabelRow>
       <LabelRow>
         <p className="font-weight-bold">in {diluent.name}</p>
         <p>{diluentVolume} mL</p>
       </LabelRow>
       <LabelRow>
-        <p className="ml-auto">Total volume: {formatNumberAsString(totalInfusionVolume)} mL</p>
+        <p className="ml-auto">
+          Total volume: {convertNumberToFormattedString(totalInfusionVolume)} mL
+        </p>
       </LabelRow>
       <LabelRow>
-        <p className="font-weight-bold">Rate: {formatNumberAsString(infusionRate)} mL / hr</p>
         <p className="font-weight-bold">
-          Infuse over {formatNumberAsString(convertedInfusionTime)} {infusionTimeUnits}
+          Rate: {convertNumberToFormattedString(infusionRate)} mL / hr
+        </p>
+        <p className="font-weight-bold">
+          Infuse over {convertNumberToFormattedString(convertedInfusionTime)} {infusionTimeUnits}
         </p>
       </LabelRow>
       <LabelRow>

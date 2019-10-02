@@ -8,7 +8,7 @@ import InfusionTimeOverrideToggle from './containers/InfusionTimeOverrideToggle'
 import MedicationInput from './containers/MedicationInput';
 import Column from '../../../../../../../../../../components/Column';
 import FormRow from '../../../../../../../../../../components/FormRow';
-import { reduceClassName } from '../../../../../../../../../../util';
+import { reduceClassNames } from '../../../../../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -56,7 +56,7 @@ function Subsection({
   );
   const StrengthInputAppendant = <span className="input-group-text">mG</span>;
   return isEnabled ? (
-    <section className={reduceClassName('border p-3', className)} {...restProps}>
+    <section className={reduceClassNames('border p-3', className)} {...restProps}>
       <h4 className="text-capitalize text-secondary">{name}</h4>
       <FormRow>
         <Column span={4}>

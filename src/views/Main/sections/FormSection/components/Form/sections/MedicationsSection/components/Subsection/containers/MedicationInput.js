@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import Input from '../../../../../../../../../../../components/Input';
 import { changeMedication } from '../../../../../../../../../../../redux/actions';
-import {
-  extractKeyFromName,
-  extractMedicationFromName,
-} from '../../../../../../../../../../../util';
+import { camelCase } from '../../../../../../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -26,13 +23,13 @@ function isInfusionTime(name) {
 }
 
 function selectInfusionTimeIsOverriddenByName(state, name) {
-  const medication = extractMedicationFromName(name);
+  const medication = camelCase.sliceFirstWord(name);
   return state.medications[medication].infusionTimeIsOverridden;
 }
 
 function selectValueByName(state, name) {
-  const medication = extractMedicationFromName(name);
-  const key = extractKeyFromName(name);
+  const medication = camelCase.sliceFirstWord(name);
+  const key = camelCase.removeFirstWord(name);
   return state.medications[medication][key];
 }
 
@@ -43,7 +40,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function handleChange({ target: { name, value } }, dispatch) {
-  const medication = extractMedicationFromName(name);
-  const key = extractKeyFromName(name);
+  const medication = camelCase.sliceFirstWord(name);
+  const key = camelCase.removeFirstWord(name);
   return dispatch(changeMedication(medication, key, value));
 }

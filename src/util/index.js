@@ -1,8 +1,7 @@
 'use-strict';
 
-export { extractKeyFromName } from './extract-key-from-name';
-export { extractMedicationFromName } from './extract-medication-from-name';
-export { filterToEnabledMedications } from './filter-to-enabled-medications';
-export { formatNumberAsString } from './format-number-as-string';
+export { camelCase } from './camel-case';
+export { convertNumberToFormattedString } from './convert-number-to-formatted-string';
 export { isInvalidDate } from './is-invalid-date';
-export { reduceClassName } from './reduce-class-name';
+export { joinStringsBySpace } from './join-strings-by-space';
+export { reduceClassNames } from './reduce-class-names';

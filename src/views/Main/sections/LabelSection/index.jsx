@@ -5,7 +5,7 @@ import React from 'react';
 
 import Label from './containers/Label';
 import { medications } from '../../../../config';
-import { reduceClassName } from '../../../../util';
+import { reduceClassNames } from '../../../../util';
 
 LabelSection.propTypes = {
   className: PropTypes.string,
@@ -16,7 +16,7 @@ export default function LabelSection({ className, ...restProps }) {
   const labels = mapToLabels(medications);
   return (
     <section
-      className={reduceClassName(BASE_CLASS_NAME, className)}
+      className={reduceClassNames(BASE_CLASS_NAME, className)}
       id="label-section"
       {...restProps}
     >

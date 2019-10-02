@@ -5,7 +5,7 @@ import React from 'react';
 
 import Info from './Info';
 import InputGroup from './InputGroup';
-import { reduceClassName } from '../../util';
+import { reduceClassNames } from '../../util';
 
 Input.propTypes = {
   info: PropTypes.string,
@@ -24,7 +24,7 @@ export default function Input({
   ...restProps
 }) {
   return (
-    <div className={reduceClassName('form-group', wrapperClassName)}>
+    <div className={reduceClassNames('form-group', wrapperClassName)}>
       <label className={labelClassName} htmlFor={name}>
         {label}
       </label>

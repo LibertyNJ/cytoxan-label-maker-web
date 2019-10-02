@@ -10,6 +10,7 @@
     "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": [2, { "ignore": ["electron"] }],
+    "import/prefer-default-export": 0,
     "jsx-a11y/label-has-for": [ 2, { "required": "id" }],
     "linebreak-style": 0,
     "no-use-before-define": ["error", { "functions": false }],
@@ -17,6 +18,7 @@
     "react/destructuring-assignment": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/prefer-stateless-function": 0,
+    "react/require-default-props": 0,
     "react/sort-comp": 0
   }
 }

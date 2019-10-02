@@ -3,16 +3,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { reduceClassName } from '../../util';
+import { reduceClassNames } from '../../util';
 
 Row.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
 
+export const BASE_CLASS_NAME = 'row';
+
 export default function Row({ children, className, ...restProps }) {
   return (
-    <div className={reduceClassName('row', className)} {...restProps}>
+    <div className={reduceClassNames(BASE_CLASS_NAME, className)} {...restProps}>
       {children}
     </div>
   );

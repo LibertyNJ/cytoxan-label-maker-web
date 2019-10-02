@@ -1,21 +1,22 @@
 {
   "name": "cytoxan-label-maker",
   "productName": "Cytoxan Label Maker",
-  "version": "1.0.1",
-  "description": "Label maker for Cytoxan and related infusions at North Shore University Hospital.",
+  "version": "1.1.0",
+  "description": "Label maker for Cytoxan and related infusions.",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package --arch=ia32",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src",
-    "watch-my-sass": "start node-sass --watch --output-style=compressed ./src/styles/scss/style.scss ./src/styles/css/style.css && start postcss ./src/styles/css/style.css --use autoprefixer --verbose --output ./src/styles/style.css --watch",
-    "test": "jest"
+    "make": "electron-forge make",
+    "package": "electron-forge package --arch=ia32",
+    "publish": "electron-forge publish",
+    "start": "electron-forge start",
+    "test": "jest --coverage",
+    "watch-my-sass": "start node-sass --watch --output-style=compressed ./src/styles/scss/style.scss ./src/styles/css/style.css && start postcss ./src/styles/css/style.css --use autoprefixer --verbose --output ./src/styles/style.css --watch"
   },
   "keywords": [],
-  "author": "Nathaniel J. Liberty",
-  "license": "MIT",
+  "author": "Nathaniel J. Liberty <nathaniel.liberty@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
   "config": {
     "forge": {
       "make_targets": {
@@ -32,13 +33,13 @@
       },
       "electronPackagerConfig": {
         "packageManager": "npm",
-        "appCopyright": ".",
+        "appCopyright": "© Nathaniel J. Liberty 2019",
         "asar": true,
         "executableName": "cytoxan-label-maker",
         "name": "Cytoxan Label Maker",
         "icon": "src/assets/images/icon.ico",
         "win32metadata": {
-          "CompanyName": ".",
+          "CompanyName": "Nathaniel J. Liberty",
           "FileDescription": "Label maker for Cytoxan and related infusions."
         }
       },
@@ -59,29 +60,24 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.24",
-    "@fortawesome/free-brands-svg-icons": "^5.11.1",
-    "@fortawesome/free-regular-svg-icons": "^5.11.1",
     "@fortawesome/free-solid-svg-icons": "^5.11.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.4.0",
-    "popper.js": "^1.14.7",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.4",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-hot-loader": "^4.12.14",
     "react-redux": "^7.1.1",
-    "react-router-dom": "^5.0.0",
     "redux": "^4.0.4"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.2.0",
     "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
@@ -102,7 +98,6 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.8.0",
     "node-sass": "^4.12.0",
-    "postcss-cli": "^6.1.2",
-    "react-test-renderer": "^16.8.6"
+    "postcss-cli": "^6.1.2"
   }
 }

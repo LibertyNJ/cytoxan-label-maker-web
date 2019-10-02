@@ -3,18 +3,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import CopyrightWidget from './CopyrightWidget';
 import VersionWidget from './VersionWidget';
-import { reduceClassName } from '../../../util';
+import { reduceClassNames } from '../../../util';
 
 Footer.propTypes = {
   className: PropTypes.string,
 };
 
+export const BASE_CLASS_NAME = 'bg-dark d-flex d-print-none justify-content-between px-3 py-1 text-light';
+
 export default function Footer({ className, ...restProps }) {
-  const BASE_CLASS_NAME = 'bg-dark d-flex d-print-none justify-content-between px-3 py-1 text-light';
   return (
-    <footer className={reduceClassName(BASE_CLASS_NAME, className)} {...restProps}>
+    <footer className={reduceClassNames(BASE_CLASS_NAME, className)} {...restProps}>
       <VersionWidget className="mb-0" />
+      <CopyrightWidget className="mb-0" />
     </footer>
   );
 }

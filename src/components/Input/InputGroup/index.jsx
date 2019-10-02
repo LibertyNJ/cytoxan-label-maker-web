@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import PendGroup from './PendGroup';
-import { reduceClassName } from '../../../util';
+import { reduceClassNames } from '../../../util';
 
 InputGroup.propTypes = {
   append: PropTypes.node,
@@ -22,7 +22,7 @@ export default function InputGroup({
     <div className="flex-nowrap input-group">
       {prepend && <PendGroup type="prepend">{prepend}</PendGroup>}
       <InputElement
-        className={reduceClassName('form-control', className)}
+        className={reduceClassNames('form-control', className)}
         id={name}
         name={name}
         type={type}

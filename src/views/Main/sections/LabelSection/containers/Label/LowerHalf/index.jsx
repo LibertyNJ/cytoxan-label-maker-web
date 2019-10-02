@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { reduceClassName } from '../../../../../../../util';
+import { reduceClassNames } from '../../../../../../../util';
 
 import CompoundingNotice from '../components/CompoundingNotice';
 import CompoundingSection from '../containers/CompoundingSection';
@@ -25,7 +25,7 @@ LowerHalf.propTypes = {
 
 export default function LowerHalf({ className, medication, ...restProps }) {
   return (
-    <div className={reduceClassName('label__lower-half', className)} {...restProps}>
+    <div className={reduceClassNames('label__lower-half', className)} {...restProps}>
       <CompoundingNotice />
       <PatientSection className="my-1" />
       <CompoundingSection className="my-1" medication={medication} />

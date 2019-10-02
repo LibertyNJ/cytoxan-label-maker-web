@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { reduceClassName } from '../../util';
+import { reduceClassNames } from '../../util';
 
 Column.propTypes = {
   children: PropTypes.node.isRequired,
@@ -16,7 +16,7 @@ export default function Column({
 }) {
   const baseClassName = span ? `col-${span}` : 'col';
   return (
-    <div className={reduceClassName(baseClassName, className)} {...restProps}>
+    <div className={reduceClassNames(baseClassName, className)} {...restProps}>
       {children}
     </div>
   );

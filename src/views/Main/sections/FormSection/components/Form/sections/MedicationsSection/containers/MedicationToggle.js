@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Toggle from '../../../../../../../../../components/Toggle';
 import { toggleMedication } from '../../../../../../../../../redux/actions';
-import { extractMedicationFromName } from '../../../../../../../../../util';
+import { camelCase } from '../../../../../../../../../util';
 
 export default connect(
   mapStateToProps,
@@ -18,7 +18,7 @@ function mapStateToProps(state, { name }) {
 }
 
 function selectMedicationisEnabledByName(state, name) {
-  const medication = extractMedicationFromName(name);
+  const medication = camelCase.sliceFirstWord(name);
   return state.medications[medication].isEnabled;
 }
 
@@ -29,6 +29,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function handleChange({ target: { name } }, dispatch) {
-  const medication = extractMedicationFromName(name);
+  const medication = camelCase.sliceFirstWord(name);
   return dispatch(toggleMedication(medication));
 }

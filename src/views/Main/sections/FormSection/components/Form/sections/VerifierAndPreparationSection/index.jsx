@@ -19,14 +19,9 @@ VerifierAndPreparationSection.defaultProps = {
   verifier: '',
 };
 
-export default function VerifierAndPreparationSection({
-  handleChange,
-  preparation,
-  verifier,
-  ...restProps
-}) {
+export default function VerifierAndPreparationSection({ preparation, verifier, ...restProps }) {
   return (
-    <Section heading="Verifier and preparaton" {...restProps}>
+    <Section heading="Verifier and preparation" {...restProps}>
       <FormRow>
         <Column>
           <VerifierInput

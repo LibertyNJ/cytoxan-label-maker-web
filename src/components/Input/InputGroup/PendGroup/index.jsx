@@ -5,7 +5,7 @@ import React from 'react';
 
 PendGroup.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['append', 'prepend']).isRequired,
 };
 
 export default function PendGroup({ children, type, ...restProps }) {
