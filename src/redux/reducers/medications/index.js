@@ -1,5 +1,3 @@
-'use-strict';
-
 import {
   CHANGE_MEDICATION,
   TOGGLE_INFUSION_TIME_OVERRIDE,

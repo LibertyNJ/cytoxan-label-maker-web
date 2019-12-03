@@ -1,5 +1,3 @@
-'use-strict';
-
 import patient, { INITIAL_STATE } from './index';
 import { CHANGE_PATIENT } from '../../actions/types';
 

@@ -1,5 +1,3 @@
-'use-strict';
-
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,12 +8,11 @@ FormSection.propTypes = {
   className: PropTypes.string,
 };
 
+const BASE_CLASS_NAME = 'd-flex d-print-none flex-column overflow-auto p-3';
+
 export default function FormSection({ className, ...restProps }) {
   return (
-    <section
-      className={reduceClassNames('d-flex d-print-none flex-column overflow-auto p-3', className)}
-      {...restProps}
-    >
+    <section className={reduceClassNames(BASE_CLASS_NAME, className)} {...restProps}>
       <Form style={{ width: 500 }} />
     </section>
   );

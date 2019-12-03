@@ -1,5 +1,3 @@
-'use-strict';
-
 import { reduceClassNames } from './index';
 
 describe('reduceClassNames(...classNames)', () => {

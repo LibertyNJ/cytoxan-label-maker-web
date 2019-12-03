@@ -1,5 +1,3 @@
-'use-strict';
-
 import { CHANGE_VERIFIER } from '../../actions/types';
 
 export const INITIAL_STATE = '';

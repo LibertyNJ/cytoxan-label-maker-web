@@ -1,5 +1,3 @@
-'use-strict';
-
 import { convertNumberToFormattedString } from './index';
 
 describe('convertNumberToFormattedString(number)', () => {

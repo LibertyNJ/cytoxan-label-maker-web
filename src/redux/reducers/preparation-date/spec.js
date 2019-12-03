@@ -1,5 +1,3 @@
-'use-strict';
-
 import preparationDate, { INITIAL_STATE } from './index';
 import { CHANGE_PREPARATION_DATE } from '../../actions/types';
 

@@ -1,5 +1,3 @@
-'use-strict';
-
 export function convertNumberToFormattedString(number) {
   const NUMBER_FORMAT = {
     maximumFractionDigits: 2,

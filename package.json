@@ -38,6 +38,7 @@
         "executableName": "cytoxan-label-maker",
         "name": "Cytoxan Label Maker",
         "icon": "src/assets/images/icon.ico",
+        "ignore": [".scss", "coverage/"],
         "win32metadata": {
           "CompanyName": "Nathaniel J. Liberty",
           "FileDescription": "Label maker for Cytoxan and related infusions."

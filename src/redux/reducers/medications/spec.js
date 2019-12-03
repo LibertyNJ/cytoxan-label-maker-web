@@ -1,5 +1,3 @@
-'use-strict';
-
 import medications, { INITIAL_STATE } from './index';
 import {
   CHANGE_MEDICATION,

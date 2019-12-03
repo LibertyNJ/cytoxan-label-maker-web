@@ -1,5 +1,3 @@
-'use-strict';
-
 import { camelCase } from './index';
 
 describe('camelCase', () => {

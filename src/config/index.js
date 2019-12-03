@@ -1,5 +1,3 @@
-'use-strict';
-
 export const facility = {
   address: {
     line1: '123 Some Street',

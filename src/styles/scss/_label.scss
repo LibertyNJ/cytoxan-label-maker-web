@@ -4,15 +4,6 @@
   color: black;
   font: 8pt/1.3 sans-serif;
 
-  header {
-    border-bottom: 1px solid black;
-    font: 7pt/1.15 sans-serif;
-  }
-
-  p {
-    margin: 0;
-  }
-
   &__body {
     height: 5in;
     margin: 0.0625in;
@@ -33,6 +24,15 @@
   &__upper-half {
     height: 2.875in;
     margin: 0 0.25in 0 0;
+  }
+
+  header {
+    border-bottom: 1px solid black;
+    font: 7pt/1.15 sans-serif;
+  }
+
+  p {
+    margin: 0;
   }
 }
 

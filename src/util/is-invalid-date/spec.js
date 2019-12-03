@@ -1,5 +1,3 @@
-'use-strict';
-
 import { isInvalidDate } from './index';
 
 describe('isInvalidDate(date)', () => {

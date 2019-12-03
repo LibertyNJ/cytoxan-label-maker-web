@@ -1,8 +1,6 @@
-'use-strict';
-
 import PropTypes from 'prop-types';
 import React from 'react';
-import { joinStringsBySpace } from '../../../util';
+import { reduceClassNames } from '../../../util';
 
 Body.propTypes = {
   children: PropTypes.node.isRequired,
@@ -11,7 +9,7 @@ Body.propTypes = {
 
 export default function Body({ children, className, ...restProps }) {
   return (
-    <main className={joinStringsBySpace('d-flex d-print-block', className)} {...restProps}>
+    <main className={reduceClassNames('d-flex d-print-block', className)} {...restProps}>
       {children}
     </main>
   );

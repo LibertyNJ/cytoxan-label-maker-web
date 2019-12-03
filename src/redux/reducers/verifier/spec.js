@@ -1,5 +1,3 @@
-'use-strict';
-
 import verifier, { INITIAL_STATE } from './index';
 import { CHANGE_VERIFIER } from '../../actions/types';
 
