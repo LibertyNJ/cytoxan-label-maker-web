@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { reduceClassNames } from '../../../../../../../util';
 
-import Header from '../components/Header';
 import ExpirationPreparationSection from '../containers/ExpirationPreparationSection';
+import Header from '../containers/Header';
 import MedicationSection from '../containers/MedicationSection';
 import PatientSection from '../containers/PatientSection';
 import VerifyFillCheckSection from '../containers/VerifyFillCheckSection';
@@ -22,7 +22,10 @@ UpperHalf.propTypes = {
 
 export default function UpperHalf({ className, medication, ...restProps }) {
   return (
-    <div className={reduceClassNames('label__upper-half', className)} {...restProps}>
+    <div
+      className={reduceClassNames('label__upper-half', className)}
+      {...restProps}
+    >
       <Header />
       <PatientSection className="my-1" />
       <MedicationSection className="my-1" medication={medication} />

@@ -1,4 +1,5 @@
 import {
+  CHANGE_FACILITY,
   CHANGE_MEDICATION,
   CHANGE_PATIENT,
   CHANGE_PREPARATION_DATE,
@@ -6,6 +7,14 @@ import {
   TOGGLE_INFUSION_TIME_OVERRIDE,
   TOGGLE_MEDICATION,
 } from './types';
+
+export function changeFacility(name, value) {
+  return {
+    name,
+    type: CHANGE_FACILITY,
+    value,
+  };
+}
 
 export function changeMedication(medication, name, value) {
   return {
