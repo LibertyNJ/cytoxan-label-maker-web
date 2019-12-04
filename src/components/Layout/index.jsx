@@ -13,7 +13,7 @@ Layout.propTypes = {
 export default function Layout({ children, className, ...restProps }) {
   return (
     <div className={reduceClassNames('d-flex d-print-block flex-column vh-100', className)} {...restProps}>
-      <Body className="flex-grow-1 flex-shrink-1">{children}</Body>
+      <Body className="flex-grow-1 flex-shrink-1 overflow-hidden">{children}</Body>
       <Footer className="flex-grow-0 flex-shrink-0" />
     </div>
   );
